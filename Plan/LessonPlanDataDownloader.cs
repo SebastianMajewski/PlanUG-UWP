@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices.WindowsRuntime;
     using System.ServiceModel;
+    using System.Text;
     using System.Threading.Tasks;
 
     using HtmlAgilityPack;
@@ -37,8 +39,8 @@
             {
                 using (var http = new HttpClient())
                 {
-                    var response = await http.GetAsync(new Uri(uri));
-                    return await response.Content.ReadAsStringAsync();
+                    var request = await http.GetBufferAsync(new Uri(uri));
+                    return Encoding.UTF8.GetString(request.ToArray());
                 }
             }
             catch (Exception)

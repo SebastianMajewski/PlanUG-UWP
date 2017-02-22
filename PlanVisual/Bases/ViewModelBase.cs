@@ -13,7 +13,7 @@
         public ViewModelBase()
         {
             this.DataDownloader = LessonPlanDataDownloader.Instance;
-            this.DataDownloader.ErrorOccured += this.OnError;
+            //this.DataDownloader.ErrorOccured += this.OnError;
         }
 
         public bool IsBusy

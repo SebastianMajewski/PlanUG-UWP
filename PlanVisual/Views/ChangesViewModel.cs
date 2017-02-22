@@ -8,8 +8,7 @@
     using Plan;
 
     using PlanVisual.Bases;
-
-    using Prism.Mvvm;
+    using PlanVisual.Tools;
 
     public class ChangesViewModel : ViewModelBase
     {
@@ -38,6 +37,11 @@
         {
             this.LoadingOn();
             this.Changes = new ObservableCollection<Change>(await this.DataDownloader.DownloadChanges());
+            foreach (var c in this.Changes)
+            {
+                Improver.ChangesSplit(c);
+            }
+
             this.LoadingOff();
         }
     }

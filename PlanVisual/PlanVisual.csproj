@@ -104,6 +104,7 @@
       <DependentUpon>BusyIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Tools\Improver.cs" />
     <Compile Include="Views\ChangesViewModel.cs" />
     <Compile Include="Views\FacultyViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">

@@ -10,11 +10,33 @@
     <Page.Resources>
         <DataTemplate x:Key="ChangesTemplate">
             <StackPanel>
-                <TextBlock Text="{Binding Subject}" FontSize="20" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Lecturer}"/>
-                <TextBlock Text="{Binding Group}"/>
-                <TextBlock Text="{Binding ClassesType}"/>
-                <TextBlock Text="{Binding Changes}"/>
+                <TextBlock Text="{Binding Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Typ zajęć:"/>
+                    <TextBlock Grid.Column="1" Text="{Binding ClassesType}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <TextBlock Text="Zmiany:" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Changes}" Margin="20,0,0,0" TextWrapping="WrapWholeWords"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>

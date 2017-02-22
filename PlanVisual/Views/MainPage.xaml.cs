@@ -24,10 +24,10 @@ namespace PlanVisual.Views
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage(MainPageViewModel viewModel)
+        public MainPage()
         {
             this.InitializeComponent();
-            this.DataContext = viewModel;
+            this.DataContext = new MainPageViewModel();
         }
     }
 }
