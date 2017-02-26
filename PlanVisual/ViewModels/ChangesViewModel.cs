@@ -1,16 +1,10 @@
-﻿namespace PlanVisual.Views
+﻿namespace PlanVisual.ViewModels
 {
-    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-
-    using Plan;
+    using Bases;
     using Plan.DataClasses;
-
-    using PlanVisual.Bases;
-    using PlanVisual.Tools;
+    using Tools;
 
     public class ChangesViewModel : ViewModelBase
     {

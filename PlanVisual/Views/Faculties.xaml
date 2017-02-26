@@ -1,0 +1,108 @@
+﻿<PivotItem
+    x:Class="PlanVisual.Views.Faculties"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:PlanVisual.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviours="using:PlanVisual.Behaviours"
+    xmlns:dataClasses="using:Plan.DataClasses"
+    mc:Ignorable="d"
+    Header="Fakultety">
+    <PivotItem.Resources>
+        <DataTemplate x:DataType="dataClasses:Classes" x:Key="SelectedClassesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" Visibility="{x:Bind Subject, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid Visibility="{x:Bind Lecturer, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Day, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Dzień:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Day}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Godziny:"/>
+                    <TextBlock Text="{x:Bind Hours}" Grid.Column="1" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Room, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Pokój / Aula:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Room}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Comments, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Komentarze:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Comments}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="dataClasses:Classes" x:Key="ClassesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" Visibility="{x:Bind Subject, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid Visibility="{x:Bind Lecturer, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <CollectionViewSource x:Key="GroupedFacultyCvs" x:Name="GroupedFacultyCvs" IsSourceGrouped="True" Source="{Binding GroupedFaculty, Mode=OneWay}"/>
+    </PivotItem.Resources>
+    <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
+        <ScrollViewer>
+            <ListView ItemsSource="{x:Bind GroupedFacultyCvs.View, Mode=OneWay}" Background="Transparent">
+                <interactivity:Interaction.Behaviors>
+                    <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
+                </interactivity:Interaction.Behaviors>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+        </ScrollViewer>
+    </controls:BusyIndicator>
+</PivotItem>

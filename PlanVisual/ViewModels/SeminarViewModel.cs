@@ -1,4 +1,4 @@
-﻿namespace PlanVisual.Views
+﻿namespace PlanVisual.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,6 @@
     using System.Linq.Expressions;
     using Bases;
     using Helpers;
-    using Plan;
     using Plan.DataClasses;
 
     public class SeminarViewModel : ViewModelBase

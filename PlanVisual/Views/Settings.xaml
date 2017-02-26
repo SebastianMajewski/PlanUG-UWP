@@ -1,0 +1,15 @@
+﻿<PivotItem
+    x:Class="PlanVisual.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:PlanVisual.Controls"
+    mc:Ignorable="d"
+    Header="Ustawienia">
+    <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
+        <ScrollViewer>
+
+        </ScrollViewer>
+    </controls:BusyIndicator>
+</PivotItem>

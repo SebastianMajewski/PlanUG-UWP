@@ -14,7 +14,7 @@
 
         public string Room { get; set; }
 
-        public string Type { get; set; }
+        public ClassesTypeObject Type { get; set; }
 
         public string Comments { get; set; }
         
@@ -22,9 +22,11 @@
 
         public string Group { get; set; }
 
+        public TimeSpan StartsAt => this.Hours.TimeFrom;
+
         public bool EqualClass(Classes c)
         {
-            if (this.Subject == c.Subject && this.Group == c.Group && this.Type == c.Type && this.Comments == c.Comments
+            if (this.Subject == c.Subject && this.Group == c.Group && this.Type.Equals(c.Type) && this.Comments == c.Comments
                 && this.DateTo == c.DateTo && this.Day.Equals(c.Day) && this.Lecturer == c.Lecturer && this.Room == c.Room)
             {
                 return true;

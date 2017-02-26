@@ -226,7 +226,18 @@
         private List<Classes> ConvertJsonToClassesObjects(string json)
         {
             var collection = JsonConvert.DeserializeObject<ClassesJson[]>(json).ToList();
-            var allHours = collection.Select(t => new Classes { Subject = t.przedmiot, Lecturer = t.nauczyciel, Room = t.sala, Comments = t.uwagi, DateTo = t.datado, Day = t.dzien.NormalizeDay().ToDayObject(), Type = t.typ, Group = t.grupa, Hours = new TimeInterval { TimeFrom = t.godz.ToTimeSpan() } }).ToList();
+            var allHours = collection.Select(t => new Classes
+            {
+                Subject = t.przedmiot,
+                Lecturer = t.nauczyciel,
+                Room = t.sala,
+                Comments = t.uwagi,
+                DateTo = t.datado,
+                Day = t.dzien.NormalizeDay().ToDayObject(),
+                Type = t.typ.NormalizeClassesType().ToClassesTypeObject(),
+                Group = t.grupa,
+                Hours = new TimeInterval { TimeFrom = t.godz.ToTimeSpan() }
+            }).ToList();
             var result = new List<Classes>();
             foreach (var c in allHours)
             {

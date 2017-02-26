@@ -2,12 +2,12 @@
 {
     using ViewModels;
 
-    public sealed partial class MainPage
+    public sealed partial class Seminars
     {
-        public MainPage()
+        public Seminars()
         {
             this.InitializeComponent();
-            this.DataContext = new MainPageViewModel();
+            this.DataContext = new SeminarViewModel();
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿namespace PlanVisual.Views
+﻿namespace PlanVisual.ViewModels
 {
-    using Plan;
-
     using PlanVisual.Bases;
 
     public class SettingsViewModel : ViewModelBase

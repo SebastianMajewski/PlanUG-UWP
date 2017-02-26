@@ -109,6 +109,8 @@
   <ItemGroup>
     <Compile Include="DataClasses\Change.cs" />
     <Compile Include="DataClasses\Classes.cs" />
+    <Compile Include="DataClasses\ClassesTypeObject.cs" />
+    <Compile Include="Enums\ClassesType.cs" />
     <Compile Include="JsonClasses\ClassesJson.cs" />
     <Compile Include="Enums\Day.cs" />
     <Compile Include="DataClasses\DayObject.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="DataClasses\Setting.cs" />
     <Compile Include="DataClasses\Specialization.cs" />
     <Compile Include="DataClasses\TimeInterval.cs" />
+    <Compile Include="Tools\ClassesTools.cs" />
     <Compile Include="Tools\DayTools.cs" />
     <Compile Include="Tools\EnumTools.cs" />
     <Compile Include="Tools\StringTools.cs" />

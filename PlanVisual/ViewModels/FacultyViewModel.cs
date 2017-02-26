@@ -1,18 +1,13 @@
-﻿namespace PlanVisual.Views
+﻿namespace PlanVisual.ViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Linq.Expressions;
-
-    using Plan;
+    using Bases;
+    using Helpers;
     using Plan.DataClasses;
-
-    using PlanVisual.Bases;
-    using PlanVisual.Helpers;
-
-    using Prism.Mvvm;
 
     public class FacultyViewModel : ViewModelBase
     {
@@ -56,7 +51,7 @@
         {
             this.LoadingOn();
             this.Faculties = new ObservableCollection<Classes>(await this.DataDownloader.DownloadPlanFaculty());
-            this.ChangeGroupByProperty((Classes c) => c.Hours);
+            this.ChangeGroupByProperty((Classes c) => c.Type);
             this.LoadingOff();
         }
 
