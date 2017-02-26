@@ -8,10 +8,9 @@
     {
         public static string ToDisplayString(this Enum value)
         {
-            var @enum = (Enum)value;
-            var description = @enum.ToString();
+            var description = value.ToString();
 
-            var attrib = GetAttribute<DisplayAttribute>(@enum);
+            var attrib = GetAttribute<DisplayAttribute>(value);
             if (attrib != null)
             {
                 description = attrib.Name;

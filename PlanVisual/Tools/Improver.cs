@@ -4,6 +4,7 @@
     using System.Linq;
 
     using Plan;
+    using Plan.DataClasses;
 
     public static class Improver
     {

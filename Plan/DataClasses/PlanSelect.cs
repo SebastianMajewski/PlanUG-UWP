@@ -1,4 +1,4 @@
-﻿namespace Plan
+﻿namespace Plan.DataClasses
 {
     public class PlanSelect
     {

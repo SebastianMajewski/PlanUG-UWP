@@ -7,6 +7,7 @@
     using System.Linq.Expressions;
 
     using Plan;
+    using Plan.DataClasses;
 
     using PlanVisual.Bases;
     using PlanVisual.Helpers;
@@ -55,7 +56,7 @@
         {
             this.LoadingOn();
             this.Faculties = new ObservableCollection<Classes>(await this.DataDownloader.DownloadPlanFaculty());
-            this.ChangeGroupByProperty((Classes c) => c.Day);
+            this.ChangeGroupByProperty((Classes c) => c.Hours);
             this.LoadingOff();
         }
 

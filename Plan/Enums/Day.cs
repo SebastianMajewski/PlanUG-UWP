@@ -1,4 +1,4 @@
-﻿namespace Plan
+﻿namespace Plan.Enums
 {
     using System.ComponentModel.DataAnnotations;
 

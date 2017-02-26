@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using Plan;
+    using Plan.DataClasses;
 
     using PlanVisual.Bases;
     using PlanVisual.Tools;

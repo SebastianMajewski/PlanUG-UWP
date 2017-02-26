@@ -1,8 +1,10 @@
-﻿namespace Plan
+﻿namespace Plan.Downloaders
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using DataClasses;
 
     public interface ILessonPlanDataDownloader
     {

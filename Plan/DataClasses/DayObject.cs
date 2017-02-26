@@ -1,6 +1,7 @@
-﻿namespace Plan
+﻿namespace Plan.DataClasses
 {
     using System;
+    using Plan.Enums;
 
     public class DayObject : IComparable
     {

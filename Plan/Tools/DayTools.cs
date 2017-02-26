@@ -1,6 +1,8 @@
 ﻿namespace Plan.Tools
 {
     using System;
+    using Plan.DataClasses;
+    using Plan.Enums;
 
     public static class DayTools
     {

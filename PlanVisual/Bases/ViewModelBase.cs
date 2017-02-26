@@ -3,6 +3,7 @@
     using System;
 
     using Plan;
+    using Plan.Downloaders;
 
     using Prism.Mvvm;
 

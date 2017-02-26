@@ -8,6 +8,7 @@
     using Bases;
     using Helpers;
     using Plan;
+    using Plan.DataClasses;
 
     public class SeminarViewModel : ViewModelBase
     {
