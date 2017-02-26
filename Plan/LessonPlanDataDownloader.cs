@@ -14,6 +14,8 @@
 
     using Windows.Web.Http;
 
+    using Plan.Tools;
+
     public class LessonPlanDataDownloader : ILessonPlanDataDownloader
     {
         private const string PlanMain = @"https://inf.ug.edu.pl/plan/index.php";
@@ -225,7 +227,7 @@
         private List<Classes> ConvertJsonToClassesObjects(string json)
         {
             var collection = JsonConvert.DeserializeObject<ClassesJson[]>(json).ToList();
-            var allHours = collection.Select(t => new Classes { Subject = t.przedmiot, Lecturer = t.nauczyciel, Room = t.sala, Comments = t.uwagi, DateTo = t.datado, Day = t.dzien, Type = t.typ, Group = t.grupa, HourFrom = t.godz }).ToList();
+            var allHours = collection.Select(t => new Classes { Subject = t.przedmiot, Lecturer = t.nauczyciel, Room = t.sala, Comments = t.uwagi, DateTo = t.datado, Day = t.dzien.NormalizeDay().ToDayObject(), Type = t.typ, Group = t.grupa, HourFrom = t.godz }).ToList();
             var result = new List<Classes>();
             foreach (var c in allHours)
             {

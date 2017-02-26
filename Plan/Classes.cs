@@ -6,7 +6,7 @@
 
         public string Lecturer { get; set; }
 
-        public string Day { get; set; }
+        public DayObject Day { get; set; }
 
         public string HourFrom { get; set; }
 
@@ -25,7 +25,7 @@
         public bool EqualClass(Classes c)
         {
             if (this.Subject == c.Subject && this.Group == c.Group && this.Type == c.Type && this.Comments == c.Comments
-                && this.DateTo == c.DateTo && this.Day == c.Day && this.Lecturer == c.Lecturer && this.Room == c.Room)
+                && this.DateTo == c.DateTo && this.Day.Equals(c.Day) && this.Lecturer == c.Lecturer && this.Room == c.Room)
             {
                 return true;
             }

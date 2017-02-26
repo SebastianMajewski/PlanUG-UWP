@@ -6,18 +6,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:PlanVisual.Converters"
     xmlns:controls="using:PlanVisual.Controls"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviours="using:PlanVisual.Behaviours"
+    xmlns:plan="using:Plan"
+    xmlns:expander="using:Expander"
     mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:Key="ChangesTemplate">
-            <StackPanel>
-                <TextBlock Text="{Binding Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:IsNullOrEmptyToVisibilityConverter x:Key="IsNullOrEmptyToVisibilityConverter"/>
+        <DataTemplate x:DataType="plan:Change" x:Key="SelectedChangesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Prowadzący:"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -25,7 +32,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Grupa:"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -33,10 +40,111 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Typ zajęć:"/>
-                    <TextBlock Grid.Column="1" Text="{Binding ClassesType}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind ClassesType}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
                 </Grid>
-                <TextBlock Text="Zmiany:" FontWeight="Bold"/>
-                <TextBlock Text="{Binding Changes}" Margin="20,0,0,0" TextWrapping="WrapWholeWords"/>
+                <StackPanel Visibility="{x:Bind Changes, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <TextBlock Text="Zmiany:" FontWeight="Bold"/>
+                    <TextBlock Text="{x:Bind Changes}" Margin="20,0,0,0" TextWrapping="WrapWholeWords"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="plan:Change" x:Key="ChangesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="plan:Classes" x:Key="SelectedClassesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" Visibility="{x:Bind Subject, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid Visibility="{x:Bind Lecturer, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Day, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Dzień:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Day}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Godziny:"/>
+                    <TextBlock Grid.Column="1" Margin="5,0,0,0" TextWrapping="WrapWholeWords">
+                        <Run Text="{x:Bind HourFrom}"/>
+                        <Run Text=" - "/>
+                        <Run Text="{x:Bind HourTo}"/>
+                    </TextBlock>
+                </Grid>
+                <Grid Visibility="{x:Bind Room, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Pokój / Aula:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Room}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Comments, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Komentarze:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Comments}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="plan:Classes" x:Key="ClassesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" Visibility="{x:Bind Subject, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid Visibility="{x:Bind Lecturer, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -45,7 +153,29 @@
         <PivotItem Header="Zmiany" DataContext="{Binding ChangesContext}">
             <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Changes}" Background="Transparent" ItemTemplate="{StaticResource ChangesTemplate}" />
+                    <StackPanel>
+                        <StackPanel Visibility="{Binding UserHasPlanChanges, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Border BorderThickness="0,0,0,2" BorderBrush="#FF2F6DD8">
+                                <TextBlock Text="Zmiany twojego planu" FontSize="24"/>
+                            </Border>
+                            <ListView Name="UserPlanChangesList" ItemsSource="{Binding UserPlanChanges}" Background="Transparent">
+                                <i:Interaction.Behaviors>
+                                    <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ChangesTemplate}" SelectedTemplate="{StaticResource SelectedChangesTemplate}"/>
+                                    <behaviours:CombinedSelectionChangedBehavior LinkedListView="{Binding ElementName=AllChangesList}"/>
+                                </i:Interaction.Behaviors>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel>
+                            <Border BorderThickness="0,0,0,2" BorderBrush="#FF2F6DD8">
+                                <TextBlock Text="Wszystkie zmiany" FontSize="24"/>
+                            </Border>
+                            <ListView Name="AllChangesList" ItemsSource="{Binding Changes}" Background="Transparent" ItemTemplate="{StaticResource ChangesTemplate}">
+                                <i:Interaction.Behaviors>
+                                    <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ChangesTemplate}" SelectedTemplate="{StaticResource SelectedChangesTemplate}"/>
+                                </i:Interaction.Behaviors>
+                            </ListView>
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </controls:BusyIndicator>
         </PivotItem>
@@ -56,40 +186,48 @@
 
         </PivotItem>
         <PivotItem Header="Seminaria" DataContext="{Binding SeminarContext}">
+            <PivotItem.Resources>
+                <CollectionViewSource x:Key="GroupedSeminarsCvs" x:Name="GroupedSeminarsCvs" IsSourceGrouped="True" Source="{Binding GroupedSeminars, Mode=OneWay}"/>
+            </PivotItem.Resources>
             <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Seminars}" Background="Transparent">
-                        <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Group}" FontSize="20"/>
-                                <TextBlock Text="{Binding Lecturer}"/>
-                                <TextBlock Text="{Binding Subject}"/>
-                                <TextBlock Text="{Binding ClassesType}"/>
-                                <TextBlock Text="{Binding Changes}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    <ListView ItemsSource="{x:Bind GroupedSeminarsCvs.View, Mode=OneWay}" Background="Transparent">
+                        <i:Interaction.Behaviors>
+                            <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
+                        </i:Interaction.Behaviors>
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
                 </ScrollViewer>
             </controls:BusyIndicator>
         </PivotItem>
         <PivotItem Header="Fakultety" DataContext="{Binding FacultyContext}">
+            <PivotItem.Resources>
+                <CollectionViewSource x:Key="GroupedFacultyCvs" x:Name="GroupedFacultyCvs" IsSourceGrouped="True" Source="{Binding GroupedFaculty, Mode=OneWay}"/>
+            </PivotItem.Resources>
             <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
                 <ScrollViewer>
-                    <ListBox ItemsSource="{Binding Faculties}" Background="Transparent">
-                        <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Group}" FontSize="20"/>
-                                <TextBlock Text="{Binding Lecturer}"/>
-                                <TextBlock Text="{Binding Subject}"/>
-                                <TextBlock Text="{Binding ClassesType}"/>
-                                <TextBlock Text="{Binding Changes}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    </ListBox>
+                    <ListView ItemsSource="{x:Bind GroupedFacultyCvs.View, Mode=OneWay}" Background="Transparent">
+                        <i:Interaction.Behaviors>
+                            <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
+                        </i:Interaction.Behaviors>
+                        <ListView.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ListView.GroupStyle>
+                    </ListView>
                 </ScrollViewer>
             </controls:BusyIndicator>
         </PivotItem>
