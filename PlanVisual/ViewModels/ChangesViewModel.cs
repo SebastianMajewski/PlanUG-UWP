@@ -4,6 +4,9 @@
     using System.Linq;
     using Bases;
     using Plan.DataClasses;
+
+    using Prism.Commands;
+
     using Tools;
 
     public class ChangesViewModel : ViewModelBase
@@ -11,10 +14,10 @@
         private ObservableCollection<Change> changes;
         private ObservableCollection<Change> userPlanchanges;
         private bool userHasPlanChanges;
+        private DelegateCommand selectedCommand;
 
         public ChangesViewModel()
         {
-            this.Load();
         }
 
         public ObservableCollection<Change> Changes
@@ -58,6 +61,8 @@
                 this.OnPropertyChanged(() => this.UserHasPlanChanges);
             }
         }
+
+        public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
         private async void Load()
         {

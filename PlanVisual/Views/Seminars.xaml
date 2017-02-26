@@ -10,6 +10,9 @@
     xmlns:dataClasses="using:Plan.DataClasses"
     mc:Ignorable="d"
     Header="Seminaria">
+    <interactivity:Interaction.Behaviors>
+        <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
+    </interactivity:Interaction.Behaviors>
     <PivotItem.Resources>
         <DataTemplate x:DataType="dataClasses:Classes" x:Key="SelectedClassesTemplate">
             <StackPanel Margin="0,10,0,10">

@@ -9,15 +9,19 @@
     using Helpers;
     using Plan.DataClasses;
 
+    using Prism.Commands;
+
     public class FacultyViewModel : ViewModelBase
     {
         private ObservableCollection<Classes> faculties;
         private IEnumerable<IGrouping<object, Classes>> groupedFaculty;
+        private DelegateCommand selectedCommand;
 
         public FacultyViewModel()
         {
-            this.Load();
         }
+
+        public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
         public ObservableCollection<Classes> Faculties
         {

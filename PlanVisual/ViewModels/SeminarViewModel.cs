@@ -5,19 +5,25 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
+
     using Bases;
     using Helpers;
     using Plan.DataClasses;
+
+    using Prism.Commands;
 
     public class SeminarViewModel : ViewModelBase
     {
         private ObservableCollection<Classes> seminars;
         private IEnumerable<IGrouping<object, Classes>> groupedSeminars;
+        private DelegateCommand selectedCommand;
 
         public SeminarViewModel()
         {
-            this.Load();
         }
+
+        public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
         public IEnumerable<IGrouping<object, Classes>> GroupedSeminars
         {
