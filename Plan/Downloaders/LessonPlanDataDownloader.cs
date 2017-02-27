@@ -10,19 +10,22 @@
     using DataClasses;
     using Exceptions;
     using HtmlAgilityPack;
-    using JsonClasses;
     using Newtonsoft.Json;
     using Tools;
+    using WebServiceClasses;
     using Windows.Web.Http;
 
     public class LessonPlanDataDownloader : ILessonPlanDataDownloader
     {
+        private const string ServiceMain = @"http://planugservice.azurewebsites.net/PlanServices.svc/";
+        private const string Changes = @"Changes";
+        private const string Seminars = @"Seminars";
+        private const string Faculty = @"Faculties";
+
+
         private const string PlanMain = @"https://inf.ug.edu.pl/plan/index.php";
-        private const string PlanSeminars = @"https://inf.ug.edu.pl/plan/index.php?zajecia=Se.[im]";
-        private const string PlanFaculty = @"https://inf.ug.edu.pl/plan/index.php?zajecia=Fa.[im]";
         private const string PlanForStudent = @"https://inf.ug.edu.pl/plan/index.php?dialog=student";
         private const string PlanForStudies = @"https://inf.ug.edu.pl/plan/index.php?dialog=grupa";
-        private const string PlanSettings = @"https://inf.ug.edu.pl/plan/dat/groups.json";
         private const string JsonSuffix = @"&format=json";
         private static LessonPlanDataDownloader instance;
 
@@ -73,109 +76,35 @@
 
         public async Task<List<Classes>> DownloadPlanForStudies(PlanSelect so)
         {
-            var json = await this.MakeWebRequest(PlanMain + so.LinkSuffix + JsonSuffix);
-            return this.ConvertJsonToClassesObjects(json);
+            var json = await this.MakeWebRequest(ServiceMain + Faculty);
+            var list = JsonConvert.DeserializeObject<List<ServiceClasses>>(json);
+            return list.Select(this.ToClasses).ToList();
         }
 
         public async Task<List<Classes>> DownloadPlanSeminars()
         {
-            var json = await this.MakeWebRequest(PlanSeminars + JsonSuffix);
-            return this.ConvertJsonToClassesObjects(json);
+            var json = await this.MakeWebRequest(ServiceMain + Seminars);
+            var list = JsonConvert.DeserializeObject<List<ServiceClasses>>(json);
+            return list.Select(this.ToClasses).ToList();
         }
 
         public async Task<List<Classes>> DownloadPlanFaculty()
         {
-            var json = await this.MakeWebRequest(PlanFaculty + JsonSuffix);
-            return this.ConvertJsonToClassesObjects(json);
+            var json = await this.MakeWebRequest(ServiceMain + Faculty);
+            var list = JsonConvert.DeserializeObject<List<ServiceClasses>>(json);
+            return list.Select(this.ToClasses).ToList();
         }
 
         public async Task<List<Change>> DownloadChanges()
         {
-            var html = await this.MakeWebRequest(PlanMain);
-
-            if (!string.IsNullOrEmpty(html))
-            {
-                var doc = new HtmlDocument();
-                doc.LoadHtml(html);
-                var table = doc.GetElementbyId("tab");
-                var changesCollection = table.Descendants("tbody")?.First().Descendants("tr");
-                return changesCollection?.Select(change => change.Descendants("td").ToList()).Select(tds => new Change { Group = tds[0].Element("nobr").InnerText, Lecturer = tds[1].Element("nobr").InnerText, Subject = tds[2].Element("nobr").InnerText, ClassesType = tds[3].Element("nobr").InnerText, Changes = tds[4].Element("nobr").InnerText }).ToList();
-            }
-            else
-            {
-                throw new EntryPointNotFoundException();
-            }
+            var json = await this.MakeWebRequest(ServiceMain + Changes);
+            var list = JsonConvert.DeserializeObject<List<ServiceChange>>(json);
+            return list.Select(this.ToChange).ToList();
         }
 
         public async Task<List<Setting>> DownloadSettings()
         {
-            var json = await this.MakeWebRequest(PlanSettings);
-            var collection = JsonConvert.DeserializeObject<LessonPlanSettingsJson[]>(json).ToList();
-            var settingsList = collection.Where(x => !x.name.Contains(" ")).Select(setting => new Setting { Symbol = setting.name, Name = setting.longname, Params = (GetMethodParams)setting.Clone(), Lectorates = new List<string>(), Specjalizations = new List<Specialization>(), Faculties = new List<PlanSelect>(), Seminars = new List<PlanSelect>() }).ToList();
-            foreach (var setting in collection.Where(x => x.name.Contains(" ") && !string.IsNullOrEmpty(x.longname)))
-            {
-                var symbolArray = setting.name.Split(' ');
-                settingsList.First(x => x.Symbol == symbolArray[0]).Specjalizations.Add(new Specialization { Name = setting.longname, Symbol = symbolArray[1], Groups = new List<Group>() });
-            }
-
-            foreach (var setting in settingsList)
-            {
-                if (setting.Specjalizations.Count == 0)
-                {
-                    setting.Specjalizations.Add(new Specialization { Groups = new List<Group>() });
-                }
-            }
-
-            foreach (var setting in collection.Where(x => string.IsNullOrEmpty(x.longname)))
-            {
-                var symbolArray = setting.name.Split(' ');
-                var set = settingsList.First(x => x.Symbol == symbolArray[0]);
-
-                if (set.Specjalizations.Count == 1 && string.IsNullOrEmpty(set.Specjalizations[0].Symbol))
-                {
-                    if (symbolArray.Length >= 2)
-                    {
-                        var group = set.Specjalizations[0].Groups.FirstOrDefault(x => x.Number == symbolArray[1]) ?? new Group { Number = symbolArray[1], Lectorates = new List<string>() };
-                        if (symbolArray.Length >= 3)
-                        {
-                            group.Lectorates.Add(symbolArray[2]);
-                        }
-
-                        if (set.Specjalizations[0].Groups.FirstOrDefault(x => x.Number == symbolArray[1]) == null)
-                        {
-                            set.Specjalizations[0].Groups.Add(group);
-                        }
-                    }
-                }
-                else
-                {
-                    if (symbolArray.Length >= 2)
-                    {
-                        var specializationIndex = set.Specjalizations.FindIndex(x => x.Symbol == symbolArray[1]);
-                        if (symbolArray.Length >= 3)
-                        {
-                            var group = set.Specjalizations[specializationIndex].Groups.FirstOrDefault(x => x.Number == symbolArray[2]) ?? new Group { Number = symbolArray[2], Lectorates = new List<string>() };
-                            if (symbolArray.Length >= 4)
-                            {
-                                group.Lectorates.Add(symbolArray[3]);
-                            }
-
-                            if (set.Specjalizations[specializationIndex].Groups.FirstOrDefault(x => x.Number == symbolArray[2]) == null)
-                            {
-                                set.Specjalizations[specializationIndex].Groups.Add(group);
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (var setting in settingsList)
-            {
-                setting.Faculties = await this.DownloadFacultySettings(setting);
-                setting.Seminars = await this.DownloadSeminarSettings(setting);
-            }
-
-            return settingsList;
+            throw new NotImplementedException();
         }
 
         public async Task<List<Classes>> DownloadPlanForStudent(PlanForStudentSetting setting)
@@ -220,38 +149,7 @@
 
             address += JsonSuffix;
             var json = await this.MakeWebRequest(address);
-            return this.ConvertJsonToClassesObjects(json);
-        }
-
-        private List<Classes> ConvertJsonToClassesObjects(string json)
-        {
-            var collection = JsonConvert.DeserializeObject<ClassesJson[]>(json).ToList();
-            var allHours = collection.Select(t => new Classes
-            {
-                Subject = t.przedmiot,
-                Lecturer = t.nauczyciel,
-                Room = t.sala,
-                Comments = t.uwagi,
-                DateTo = t.datado,
-                Day = t.dzien.NormalizeDay().ToDayObject(),
-                Type = t.typ.NormalizeClassesType().ToClassesTypeObject(),
-                Group = t.grupa,
-                Hours = new TimeInterval { TimeFrom = t.godz.ToTimeSpan() }
-            }).ToList();
-            var result = new List<Classes>();
-            foreach (var c in allHours)
-            {
-                if (result.Any(x => x.EqualClass(c)))
-                {
-                    result.First(x => x.EqualClass(c)).Merge(c);
-                }
-                else
-                {
-                    result.Add(c);
-                }
-            }
-
-            return result;
+            return new List<Classes>();
         }
 
         private async Task<List<PlanSelect>> DownloadSeminarSettings(Setting setting)
@@ -312,6 +210,58 @@
             options = setting.Symbol[1] == 'I' ? options.Where(x => x.GetAttributeValue("class", string.Empty) == "inf") : options.Where(x => x.GetAttributeValue("class", string.Empty) == "mat");
 
             return options.Select(option => new PlanSelect { LinkSuffix = option.GetAttributeValue("value", string.Empty), Name = option.InnerText }).ToList();
+        }
+
+        private Classes ToClasses(ServiceClasses classes)
+        {
+            return new Classes
+            {
+                Lecturer = classes.Lecturer,
+                Type = classes.Type.ToClassesTypeObject(),
+                Group = classes.Group,
+                Subject = classes.Subject,
+                Day = classes.Day.ToDayObject(),
+                Comments = classes.Comments,
+                DateTo = classes.DateTo,
+                Hours = this.ToTimeInterval(classes.HourFrom, classes.HourTo),
+                Room = classes.Room
+            };
+        }
+
+        private TimeInterval ToTimeInterval(string from, string to)
+        {
+            var interval = new TimeInterval();
+            if (string.IsNullOrEmpty(from))
+            {
+                interval.TimeFrom = null;
+            }
+            else
+            {
+                interval.TimeFrom = TimeSpan.Parse(from);
+            }
+
+            if (string.IsNullOrEmpty(to))
+            {
+                interval.TimeTo = null;
+            }
+            else
+            {
+                interval.TimeTo = TimeSpan.Parse(to);
+            }
+
+            return interval;
+        }
+
+        private Change ToChange(ServiceChange change)
+        {
+            return new Change
+            {
+                Lecturer = change.Lecturer,
+                ClassesType = change.ClassesType.ToClassesTypeObject(),
+                Group = change.Group,
+                Changes = change.Changes,
+                Subject = change.Subject
+            };
         }
     }
 }

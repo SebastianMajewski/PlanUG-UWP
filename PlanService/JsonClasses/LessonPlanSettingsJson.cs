@@ -1,4 +1,4 @@
-﻿namespace Plan.JsonClasses
+﻿namespace PlanService.JsonClasses
 {
     using DataClasses;
 

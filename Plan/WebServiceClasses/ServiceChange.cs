@@ -1,6 +1,8 @@
-﻿namespace Plan.DataClasses
+﻿namespace Plan.WebServiceClasses
 {
-    public class Change
+    using Plan.Enums;
+
+    public class ServiceChange
     {
         public string Group { get; set; }
 
@@ -8,7 +10,7 @@
 
         public string Subject { get; set; }
 
-        public ClassesTypeObject ClassesType { get; set; }
+        public ClassesType ClassesType { get; set; }
 
         public string Changes { get; set; }
     }

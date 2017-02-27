@@ -108,17 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses\Change.cs" />
+    <Compile Include="WebServiceClasses\ServiceChange.cs" />
     <Compile Include="DataClasses\Classes.cs" />
     <Compile Include="DataClasses\ClassesTypeObject.cs" />
     <Compile Include="Enums\ClassesType.cs" />
-    <Compile Include="JsonClasses\ClassesJson.cs" />
     <Compile Include="Enums\Day.cs" />
     <Compile Include="DataClasses\DayObject.cs" />
     <Compile Include="Exceptions\EntryPointNotFoundException.cs" />
     <Compile Include="DataClasses\GetMethodParams.cs" />
     <Compile Include="DataClasses\Group.cs" />
     <Compile Include="Downloaders\ILessonPlanDataDownloader.cs" />
-    <Compile Include="JsonClasses\LessonPlanSettingsJson.cs" />
     <Compile Include="DataClasses\PlanForStudentSetting.cs" />
     <Compile Include="DataClasses\PlanSelect.cs" />
     <Compile Include="Downloaders\LessonPlanDataDownloader.cs" />
@@ -129,8 +128,8 @@
     <Compile Include="Tools\ClassesTools.cs" />
     <Compile Include="Tools\DayTools.cs" />
     <Compile Include="Tools\EnumTools.cs" />
-    <Compile Include="Tools\StringTools.cs" />
     <Compile Include="Tools\TimeTools.cs" />
+    <Compile Include="WebServiceClasses\ServiceClasses.cs" />
     <EmbeddedResource Include="Properties\Plan.rd.xml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

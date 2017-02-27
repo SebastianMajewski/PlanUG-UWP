@@ -1,11 +1,15 @@
-﻿namespace Plan.DataClasses
+﻿namespace PlanService.DataClasses
 {
     using System;
+    using System.Runtime.Serialization;
 
+    [DataContract]
     public class TimeInterval : IComparable
     {
+        [DataMember]
         public TimeSpan? TimeFrom { get; set; }
 
+        [DataMember]
         public TimeSpan? TimeTo { get; set; }
 
         public override bool Equals(object obj)
@@ -45,7 +49,7 @@
             var o = obj as TimeInterval;
             if (o != null && this.TimeFrom != null && o.TimeFrom != null)
             {
-                var comp = this.TimeFrom.Value.CompareTo(o.TimeFrom.Value);
+                var comp = this.TimeFrom.Value.CompareTo(o.TimeFrom);
                 if (comp == 0)
                 {
                     if (this.TimeTo == null && o.TimeTo == null)
@@ -62,7 +66,7 @@
                     }
                     else
                     {
-                        return this.TimeTo.Value.CompareTo(o.TimeTo.Value);
+                        return this.TimeTo.Value.CompareTo(o.TimeTo);
                     }
                 }
                 else

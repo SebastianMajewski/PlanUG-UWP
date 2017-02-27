@@ -5,6 +5,7 @@
 
     using Plan;
     using Plan.DataClasses;
+    using Plan.WebServiceClasses;
 
     public static class Improver
     {

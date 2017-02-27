@@ -4,6 +4,7 @@
     using System.Linq;
     using Bases;
     using Plan.DataClasses;
+    using Plan.WebServiceClasses;
 
     using Prism.Commands;
 
