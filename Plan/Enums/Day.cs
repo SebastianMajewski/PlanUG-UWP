@@ -5,18 +5,18 @@
     public enum Day
     {
         [Display(Name = "Poniedziałek")]
-        Monday,
+        Monday = 0,
         [Display(Name = "Wtorek")]
-        Tuesday,
+        Tuesday = 1,
         [Display(Name = "Środa")]
-        Wednesday,
+        Wednesday = 2,
         [Display(Name = "Czwartek")]
-        Thursday,
+        Thursday = 3,
         [Display(Name = "Piątek")]
-        Friday,
+        Friday = 4,
         [Display(Name = "Sobota")]
-        Saturday,
+        Saturday = 5,
         [Display(Name = "Niedziela")]
-        Sunday
+        Sunday = 6
     }
 }

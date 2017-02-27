@@ -68,7 +68,7 @@
         private async void Load()
         {
             this.LoadingOn();
-            this.Changes = new ObservableCollection<Change>(await this.DataDownloader.DownloadChanges());
+            this.Changes = new ObservableCollection<Change>(await this.Service.GetChanges());
             foreach (var c in this.Changes)
             {
                 Improver.ChangesSplit(c);

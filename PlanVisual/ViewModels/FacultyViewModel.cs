@@ -54,7 +54,7 @@
         private async void Load()
         {
             this.LoadingOn();
-            this.Faculties = new ObservableCollection<Classes>(await this.DataDownloader.DownloadPlanFaculty());
+            this.Faculties = new ObservableCollection<Classes>(await this.Service.GetPlanFaculty());
             this.ChangeGroupByProperty((Classes c) => c.Type);
             this.LoadingOff();
         }

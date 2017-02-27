@@ -2,10 +2,10 @@
 {
     public enum ClassesType
     {
-        Laboratories,
-        Practices,
-        Lectures,
-        Seminars,
-        Faculties,
+        Laboratories = 0,
+        Practices = 1,
+        Lectures = 2,
+        Seminars = 3,
+        Faculties = 4,
     }
 }

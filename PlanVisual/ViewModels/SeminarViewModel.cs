@@ -56,7 +56,7 @@
         private async void Load()
         {
             this.LoadingOn();
-            this.Seminars = new ObservableCollection<Classes>(await this.DataDownloader.DownloadPlanSeminars());
+            this.Seminars = new ObservableCollection<Classes>(await this.Service.GetPlanSeminars());
             this.ChangeGroupByProperty((Classes c) => c.Day);
             this.LoadingOff();
         }

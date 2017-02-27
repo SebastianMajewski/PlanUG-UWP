@@ -28,7 +28,7 @@
                     foreach (var b in behaviors)
                     {
                         var behavior = b as PivotItemSelectedBehavior;
-                        if (behavior != null)
+                        if (behavior?.Command != null)
                         {
                             if (behavior.Command.CanExecute(null))
                             {

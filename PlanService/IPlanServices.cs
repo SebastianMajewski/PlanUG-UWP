@@ -19,5 +19,13 @@
         [OperationContract]
         [WebGet(UriTemplate = "Faculties")]
         List<Classes> Faculties();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "StudiesSelects")]
+        List<PlanSelect> StudiesSelects();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "PlanForStudies")]
+        List<Classes> PlanForStudies(PlanSelect select);
     }
 }

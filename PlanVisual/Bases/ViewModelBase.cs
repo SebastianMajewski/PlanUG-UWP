@@ -3,7 +3,8 @@
     using System;
 
     using Plan;
-    using Plan.Downloaders;
+    using Plan.RestClient;
+    using Plan.Service;
 
     using Prism.Mvvm;
 
@@ -13,8 +14,7 @@
 
         public ViewModelBase()
         {
-            this.DataDownloader = LessonPlanDataDownloader.Instance;
-            //this.DataDownloader.ErrorOccured += this.OnError;
+            this.Service = new ServiceConnection(new RestClient());
         }
 
         public bool IsBusy
@@ -31,7 +31,7 @@
             }
         }
 
-        protected ILessonPlanDataDownloader DataDownloader { get; private set; }
+        protected IServiceConnection Service { get; private set; }
 
         public void LoadingOn()
         {
@@ -41,11 +41,6 @@
         public void LoadingOff()
         {
             this.IsBusy = false;
-        }
-
-        private void OnError(Exception exception)
-        {
-            
         }
     }
 }

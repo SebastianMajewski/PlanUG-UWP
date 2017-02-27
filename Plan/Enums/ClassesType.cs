@@ -5,14 +5,14 @@
     public enum ClassesType
     {
         [Display(Name = "Laboratorium")]
-        Laboratories,
+        Laboratories = 0,
         [Display(Name = "Ćwiczenia")]
-        Practices,
+        Practices = 1,
         [Display(Name = "Wykład")]
-        Lectures,
+        Lectures = 2,
         [Display(Name = "Seminarium")]
-        Seminars,
+        Seminars = 3,
         [Display(Name = "Fakultet")]
-        Faculties,
+        Faculties = 4,
     }
 }

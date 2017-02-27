@@ -16,7 +16,7 @@
     <Grid>
         <ContentPresenter Content="{Binding ElementName=Busy, Path=UnderContent}"/>
         <Grid Visibility="{Binding ElementName=Busy, Path=IsActive, Converter={StaticResource BooleanToVisibilityConverter}}" Canvas.ZIndex="1000">
-            <Rectangle Fill="#44000000"/>
+            <Rectangle Fill="#99000000"/>
             <StackPanel Canvas.ZIndex="1000" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ProgressRing Width="70" Height="70" IsActive="{Binding ElementName=Busy, Path=IsActive}"/>
                 <TextBlock Text="{Binding ElementName=Busy, Path=Text}"/>
