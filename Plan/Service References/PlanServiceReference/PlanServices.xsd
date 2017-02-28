@@ -9,6 +9,7 @@
       <xs:enumeration value="Seminars" />
       <xs:enumeration value="Faculties" />
       <xs:enumeration value="Internships" />
+      <xs:enumeration value="Lectorates" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ClassesType" nillable="true" type="tns:ClassesType" />

@@ -10,6 +10,8 @@
     using Plan.DataClasses;
     using Plan.PlanServiceReference;
 
+    using PlanVisual.Tools;
+
     using Prism.Commands;
 
     public class StudyViewModel : ViewModelBase
@@ -94,6 +96,11 @@
             this.FormVisibled = false;
             this.LoadingOn();
             this.Classes = new ObservableCollection<ExtendedClasses>(await this.Service.GetPlanForStudies(option));
+            foreach (var f in this.Classes)
+            {
+                Improver.LecturerSplit(f);
+            }
+
             this.ChangeGroupByProperty((ExtendedClasses c) => c.Type);
             this.LoadingOff();
         }

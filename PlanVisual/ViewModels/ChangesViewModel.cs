@@ -84,6 +84,7 @@
             foreach (var c in this.Changes)
             {
                 Improver.ChangesSplit(c);
+                Improver.LecturerSplit(c);
             }
 
             //this.UserPlanChanges = new ObservableCollection<ExtendedChange> { this.Changes.Last() };

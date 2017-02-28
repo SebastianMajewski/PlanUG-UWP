@@ -126,6 +126,9 @@ namespace Plan.PlanServiceReference {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Internships = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Lectorates = 6,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

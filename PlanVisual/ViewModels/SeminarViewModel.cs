@@ -11,6 +11,8 @@
     using Helpers;
     using Plan.DataClasses;
 
+    using PlanVisual.Tools;
+
     using Prism.Commands;
 
     public class SeminarViewModel : ViewModelBase
@@ -57,6 +59,11 @@
         {
             this.LoadingOn();
             this.Seminars = new ObservableCollection<ExtendedClasses>(await this.Service.GetPlanSeminars());
+            foreach (var f in this.Seminars)
+            {
+                Improver.LecturerSplit(f);
+            }
+
             this.ChangeGroupByProperty((ExtendedClasses c) => c.Day);
             this.LoadingOff();
         }

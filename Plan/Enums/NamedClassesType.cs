@@ -16,5 +16,7 @@
         Faculties = 4,
         [Display(Name = "Praktyki")]
         Internships = 5,
+        [Display(Name = "Lektorat")]
+        Lectorates = 6,
     }
 }

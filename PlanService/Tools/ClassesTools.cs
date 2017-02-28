@@ -31,6 +31,9 @@
                 case "praktyki":
                 case "prak":
                     return ClassesType.Internships;
+                case "lektorat":
+                case "lek":
+                    return ClassesType.Lectorates;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
