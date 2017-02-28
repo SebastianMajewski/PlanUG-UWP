@@ -1,27 +1,27 @@
 ﻿namespace PlanVisual.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.ServiceModel;
+
+    using Windows.UI.Popups;
+
     using Bases;
     using Plan.DataClasses;
-    using Plan.WebServiceClasses;
+    using Plan.ServiceReference;
 
     using Prism.Commands;
-
     using Tools;
 
     public class ChangesViewModel : ViewModelBase
     {
-        private ObservableCollection<Change> changes;
-        private ObservableCollection<Change> userPlanchanges;
+        private ObservableCollection<ExtendedChange> changes;
+        private ObservableCollection<ExtendedChange> userPlanchanges;
         private bool userHasPlanChanges;
         private DelegateCommand selectedCommand;
 
-        public ChangesViewModel()
-        {
-        }
-
-        public ObservableCollection<Change> Changes
+        public ObservableCollection<ExtendedChange> Changes
         {
             get
             {
@@ -35,7 +35,7 @@
             }
         }
 
-        public ObservableCollection<Change> UserPlanChanges
+        public ObservableCollection<ExtendedChange> UserPlanChanges
         {
             get
             {
@@ -68,14 +68,30 @@
         private async void Load()
         {
             this.LoadingOn();
-            this.Changes = new ObservableCollection<Change>(await this.Service.GetChanges());
+            try
+            {
+                this.Changes = new ObservableCollection<ExtendedChange>(await this.Service.GetChanges());
+            }
+            catch (FaultException<ServiceFault> f)
+            {
+                await new MessageDialog(f.Detail.Type.ToString()).ShowAsync();
+            }
+            catch (Exception e)
+            {
+                await new MessageDialog(e.Message).ShowAsync();
+            }
+            finally
+            {
+                this.Changes = new ObservableCollection<ExtendedChange>();
+            }
+
             foreach (var c in this.Changes)
             {
                 Improver.ChangesSplit(c);
             }
 
-            this.UserPlanChanges = new ObservableCollection<Change> { this.Changes.Last() };
-            this.UserHasPlanChanges = true;
+            //this.UserPlanChanges = new ObservableCollection<ExtendedChange> { this.Changes.Last() };
+            //this.UserHasPlanChanges = true;
 
             this.LoadingOff();
         }

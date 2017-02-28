@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum ClassesType
+    public enum NamedClassesType
     {
         [Display(Name = "Laboratorium")]
         Laboratories = 0,
@@ -14,5 +14,7 @@
         Seminars = 3,
         [Display(Name = "Fakultet")]
         Faculties = 4,
+        [Display(Name = "Praktyki")]
+        Internships = 5,
     }
 }

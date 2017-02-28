@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PlanServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" />
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" />
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PlanService.Enums" />
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPlanServices_Changes_InputMessage">
+    <wsdl:part name="parameters" element="tns:Changes" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Changes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Changes_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Seminars_InputMessage">
+    <wsdl:part name="parameters" element="tns:Seminars" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Seminars_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SeminarsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Seminars_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q2:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Faculties_InputMessage">
+    <wsdl:part name="parameters" element="tns:Faculties" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Faculties_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FacultiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_Faculties_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_StudiesSelects_InputMessage">
+    <wsdl:part name="parameters" element="tns:StudiesSelects" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_StudiesSelects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StudiesSelectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_StudiesSelects_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q4:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_PlanForStudies_InputMessage">
+    <wsdl:part name="parameters" element="tns:PlanForStudies" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_PlanForStudies_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PlanForStudiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_PlanForStudies_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q5:ServiceFault" />
+  </wsdl:message>
+  <wsdl:portType name="IPlanServices">
+    <wsdl:operation name="Changes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/Changes" message="tns:IPlanServices_Changes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/ChangesResponse" message="tns:IPlanServices_Changes_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/ChangesServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_Changes_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Seminars">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/Seminars" message="tns:IPlanServices_Seminars_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/SeminarsResponse" message="tns:IPlanServices_Seminars_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/SeminarsServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_Seminars_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Faculties">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/Faculties" message="tns:IPlanServices_Faculties_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/FacultiesResponse" message="tns:IPlanServices_Faculties_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/FacultiesServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_Faculties_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StudiesSelects">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/StudiesSelects" message="tns:IPlanServices_StudiesSelects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/StudiesSelectsResponse" message="tns:IPlanServices_StudiesSelects_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/StudiesSelectsServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_StudiesSelects_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlanForStudies">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudies" message="tns:IPlanServices_PlanForStudies_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudiesResponse" message="tns:IPlanServices_PlanForStudies_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudiesServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_PlanForStudies_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="PlanServices" />
+</wsdl:definitions>

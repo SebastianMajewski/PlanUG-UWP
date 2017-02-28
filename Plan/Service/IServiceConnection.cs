@@ -1,24 +1,30 @@
 ﻿namespace Plan.Service
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Threading.Tasks;
 
     using DataClasses;
 
+    using Plan.ServiceReference;
+
+    using ExtendedChange = Plan.DataClasses.ExtendedChange;
+    using ExtendedClasses = Plan.DataClasses.ExtendedClasses;
+
     public interface IServiceConnection
     {
-        Task<List<Change>> GetChanges();
+        Task<List<ExtendedChange>> GetChanges();
 
-        Task<List<Classes>> GetPlanFaculty();
+        Task<List<ExtendedClasses>> GetPlanFaculty();
 
-        Task<List<Classes>> GetPlanForStudent(PlanForStudentSetting setting);
+        //Task<List<ExtendedClasses>> GetPlanForStudent(PlanForStudentSetting setting);
 
-        Task<List<Classes>> GetPlanForStudies(PlanSelect so);
+        Task<List<ExtendedClasses>> GetPlanForStudies(PlanSelect so);
 
         Task<List<PlanSelect>> GetPlanForStudiesOptions();
 
-        Task<List<Classes>> GetPlanSeminars();
+        Task<List<ExtendedClasses>> GetPlanSeminars();
 
-        Task<List<Setting>> GetSettings();
+        //Task<List<Setting>> GetSettings();
     }
 }

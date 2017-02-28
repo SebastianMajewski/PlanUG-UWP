@@ -7,7 +7,7 @@
     {
         public string Name { get; set; }
 
-        public Day Day { get; set; }
+        public NamedDay Day { get; set; }
 
         public override string ToString()
         {

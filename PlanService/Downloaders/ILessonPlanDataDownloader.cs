@@ -8,8 +8,6 @@
 
     public interface ILessonPlanDataDownloader
     {
-        event Action<Exception> ErrorOccured;
-
         Task<List<Change>> DownloadChanges();
 
         Task<List<Classes>> DownloadPlanFaculty();
@@ -23,7 +21,5 @@
         Task<List<Classes>> DownloadPlanSeminars();
 
         Task<List<Setting>> DownloadSettings();
-
-        Task<string> MakeWebRequest(string uri);
     }
 }

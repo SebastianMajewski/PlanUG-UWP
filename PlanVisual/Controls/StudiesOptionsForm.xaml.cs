@@ -1,7 +1,7 @@
 ﻿namespace PlanVisual.Controls
 {
     using System.Collections.ObjectModel;
-    using Plan.DataClasses;
+    using Plan.ServiceReference;
     using Prism.Commands;
     using Windows.UI.Xaml;
 

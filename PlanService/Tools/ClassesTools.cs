@@ -20,6 +20,7 @@
                     return ClassesType.Laboratories;
                 case "wyklad":
                 case "wyk":
+                case "w":
                     return ClassesType.Lectures;
                 case "seminarium":
                 case "sem":
@@ -27,6 +28,9 @@
                 case "fakultet":
                 case "fak":
                     return ClassesType.Faculties;
+                case "praktyki":
+                case "prak":
+                    return ClassesType.Internships;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

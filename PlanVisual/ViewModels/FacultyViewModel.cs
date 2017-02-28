@@ -13,8 +13,8 @@
 
     public class FacultyViewModel : ViewModelBase
     {
-        private ObservableCollection<Classes> faculties;
-        private IEnumerable<IGrouping<object, Classes>> groupedFaculty;
+        private ObservableCollection<ExtendedClasses> faculties;
+        private IEnumerable<IGrouping<object, ExtendedClasses>> groupedFaculty;
         private DelegateCommand selectedCommand;
 
         public FacultyViewModel()
@@ -23,7 +23,7 @@
 
         public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
-        public ObservableCollection<Classes> Faculties
+        public ObservableCollection<ExtendedClasses> Faculties
         {
             get
             {
@@ -37,7 +37,7 @@
             }
         }
 
-        public IEnumerable<IGrouping<object, Classes>> GroupedFaculty
+        public IEnumerable<IGrouping<object, ExtendedClasses>> GroupedFaculty
         {
             get
             {
@@ -54,8 +54,8 @@
         private async void Load()
         {
             this.LoadingOn();
-            this.Faculties = new ObservableCollection<Classes>(await this.Service.GetPlanFaculty());
-            this.ChangeGroupByProperty((Classes c) => c.Type);
+            this.Faculties = new ObservableCollection<ExtendedClasses>(await this.Service.GetPlanFaculty());
+            this.ChangeGroupByProperty((ExtendedClasses c) => c.Type);
             this.LoadingOff();
         }
 

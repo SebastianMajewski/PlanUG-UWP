@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum Day
+    public enum NamedDay
     {
         [Display(Name = "Poniedziałek")]
         Monday = 0,

@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -113,9 +114,10 @@
     <Compile Include="DataClasses\TimeInterval.cs" />
     <Compile Include="Downloaders\ILessonPlanDataDownloader.cs" />
     <Compile Include="Downloaders\LessonPlanDataDownloader.cs" />
+    <Compile Include="Exceptions\ServiceFault.cs" />
     <Compile Include="Enums\ClassesType.cs" />
     <Compile Include="Enums\Day.cs" />
-    <Compile Include="Exceptions\EntryPointNotFoundException.cs" />
+    <Compile Include="Enums\ErrorType.cs" />
     <Compile Include="IPlanServices.cs" />
     <Compile Include="JsonClasses\ClassesJson.cs" />
     <Compile Include="JsonClasses\LessonPlanSettingsJson.cs" />

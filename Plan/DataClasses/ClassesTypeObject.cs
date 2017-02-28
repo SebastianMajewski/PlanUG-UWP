@@ -8,7 +8,7 @@
     {
         public string Name { get; set; }
 
-        public ClassesType Type { get; set; }
+        public NamedClassesType Type { get; set; }
 
         public override string ToString()
         {

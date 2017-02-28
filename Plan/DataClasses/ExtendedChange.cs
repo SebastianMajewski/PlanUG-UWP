@@ -1,6 +1,6 @@
 ﻿namespace Plan.DataClasses
 {
-    public class Change
+    public class ExtendedChange
     {
         public string Group { get; set; }
 

@@ -4,11 +4,14 @@
     using DataClasses;
     using Enums;
 
+    using Plan.ServiceReference;
+
     public static class ClassesTools
     {
         public static ClassesTypeObject ToClassesTypeObject(this ClassesType type)
         {
-            return new ClassesTypeObject { Type = type, Name = type.ToDisplayString() };
+            var namedtype = (NamedClassesType)type;
+            return new ClassesTypeObject { Type = namedtype, Name = namedtype.ToDisplayString() };
         }
     }
 }

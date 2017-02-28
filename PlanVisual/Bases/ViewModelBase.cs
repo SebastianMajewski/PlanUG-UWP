@@ -1,11 +1,6 @@
 ﻿namespace PlanVisual.Bases
 {
-    using System;
-
-    using Plan;
-    using Plan.RestClient;
     using Plan.Service;
-
     using Prism.Mvvm;
 
     public class ViewModelBase : BindableBase
@@ -14,7 +9,7 @@
 
         public ViewModelBase()
         {
-            this.Service = new ServiceConnection(new RestClient());
+            this.Service = new ServiceConnection();
         }
 
         public bool IsBusy

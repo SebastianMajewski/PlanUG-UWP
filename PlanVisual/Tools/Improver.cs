@@ -2,14 +2,11 @@
 {
     using System;
     using System.Linq;
-
-    using Plan;
     using Plan.DataClasses;
-    using Plan.WebServiceClasses;
 
     public static class Improver
     {
-        public static void ChangesSplit(Change change)
+        public static void ChangesSplit(ExtendedChange change)
         {
             if (change.Changes.Trim().EndsWith(";"))
             {

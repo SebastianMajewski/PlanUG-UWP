@@ -3,76 +3,65 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.ServiceModel;
     using System.Threading.Tasks;
     using DataClasses;
-    using Newtonsoft.Json;
-    using RestClient;
+    using ServiceReference;
     using Tools;
-    using WebServiceClasses;
 
     public class ServiceConnection : IServiceConnection
     {
-        private const string ServiceMain = @"http://planugservice.azurewebsites.net/PlanServices.svc/";
-        private const string Changes = @"Changes";
-        private const string Seminars = @"Seminars";
-        private const string Faculty = @"Faculties";
-        private const string ForStudies = @"PlanForStudies";
-        private const string StudiesSelects = @"StudiesSelects";
+        private const string Uri = @"http://planugservice.azurewebsites.net/PlanServices.svc/soap";
+        private readonly PlanServicesClient client;
 
-        private readonly IRestClient client;
-
-        public ServiceConnection(IRestClient client)
+        public ServiceConnection()
         {
-            this.client = client;
+            var binding = new BasicHttpBinding { MaxBufferSize = int.MaxValue, MaxReceivedMessageSize = int.MaxValue };
+            var endPoint = new EndpointAddress(new Uri(Uri));
+            this.client = new PlanServicesClient(binding, endPoint);
         }
 
         public async Task<List<PlanSelect>> GetPlanForStudiesOptions()
         {
-            var json = await this.client.GetRequest(ServiceMain + StudiesSelects);
-            return JsonConvert.DeserializeObject<List<PlanSelect>>(json);
+            return (await this.client.StudiesSelectsAsync()).ToList();
         }
 
-        public async Task<List<Classes>> GetPlanForStudies(PlanSelect so)
-        {         
-            var json = await this.client.PostRequest(ServiceMain + ForStudies, so);
-            var list = JsonConvert.DeserializeObject<List<ServiceClasses>>(json);
-            return list.Select(this.ToClasses).ToList();
-        }
-
-        public async Task<List<Classes>> GetPlanSeminars()
+        public async Task<List<ExtendedClasses>> GetPlanForStudies(PlanSelect so)
         {
-            var json = await this.client.GetRequest(ServiceMain + Seminars);
-            var list = JsonConvert.DeserializeObject<List<ServiceClasses>>(json);
-            return list.Select(this.ToClasses).ToList();
+            var classes = await this.client.PlanForStudiesAsync(so);
+            return classes.Select(this.ToExtendedClasses).ToList();
         }
 
-        public async Task<List<Classes>> GetPlanFaculty()
+        public async Task<List<ExtendedClasses>> GetPlanSeminars()
         {
-            var json = await this.client.GetRequest(ServiceMain + Faculty);
-            var list = JsonConvert.DeserializeObject<List<ServiceClasses>>(json);
-            return list.Select(this.ToClasses).ToList();
+            var classes = await this.client.SeminarsAsync();
+            return classes.Select(this.ToExtendedClasses).ToList();
         }
 
-        public async Task<List<Change>> GetChanges()
+        public async Task<List<ExtendedClasses>> GetPlanFaculty()
         {
-            var json = await this.client.GetRequest(ServiceMain + Changes);
-            var list = JsonConvert.DeserializeObject<List<ServiceChange>>(json);
-            return list.Select(this.ToChange).ToList();
+            var classes = await this.client.FacultiesAsync();
+            return classes.Select(this.ToExtendedClasses).ToList();
         }
 
-        public async Task<List<Setting>> GetSettings()
+        public async Task<List<ExtendedChange>> GetChanges()
         {
-            throw new NotImplementedException();
+            var classes = await this.client.ChangesAsync();
+            return classes.Select(this.ToExtendedChange).ToList();
         }
 
-        public async Task<List<Classes>> GetPlanForStudent(PlanForStudentSetting setting)
-        {
-            throw new NotImplementedException();
-        }
+        // public async Task<List<Setting>> GetSettings()
+        // {
+        //     throw new NotImplementedException();
+        // }
 
-        private Classes ToClasses(ServiceClasses classes)
+        // public async Task<List<Classes>> GetPlanForStudent(PlanForStudentSetting setting)
+        // {
+        //     throw new NotImplementedException();
+        // }
+        private ExtendedClasses ToExtendedClasses(Classes classes)
         {
-            return new Classes
+            return new ExtendedClasses
             {
                 Lecturer = classes.Lecturer,
                 Type = classes.Type.ToClassesTypeObject(),
@@ -110,9 +99,9 @@
             return interval;
         }
 
-        private Change ToChange(ServiceChange change)
+        private ExtendedChange ToExtendedChange(Change change)
         {
-            return new Change
+            return new ExtendedChange
             {
                 Lecturer = change.Lecturer,
                 ClassesType = change.ClassesType.ToClassesTypeObject(),

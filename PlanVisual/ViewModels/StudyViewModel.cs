@@ -8,13 +8,15 @@
     using Bases;
     using Helpers;
     using Plan.DataClasses;
+    using Plan.ServiceReference;
+
     using Prism.Commands;
 
     public class StudyViewModel : ViewModelBase
     {
-        private ObservableCollection<Classes> classes;
+        private ObservableCollection<ExtendedClasses> classes;
         private ObservableCollection<PlanSelect> options;
-        private IEnumerable<IGrouping<object, Classes>> groupedclasses;
+        private IEnumerable<IGrouping<object, ExtendedClasses>> groupedclasses;
         private DelegateCommand selectedCommand;
         private DelegateCommand<PlanSelect> applyCommand;
         private bool formVisibled;
@@ -23,7 +25,7 @@
 
         public DelegateCommand<PlanSelect> ApplyCommand => this.applyCommand ?? (this.applyCommand = new DelegateCommand<PlanSelect>(this.OptionSelected));
 
-        public ObservableCollection<Classes> Classes
+        public ObservableCollection<ExtendedClasses> Classes
         {
             get
             {
@@ -65,7 +67,7 @@
             }
         }
 
-        public IEnumerable<IGrouping<object, Classes>> GroupedClasses
+        public IEnumerable<IGrouping<object, ExtendedClasses>> GroupedClasses
         {
             get
             {
@@ -91,8 +93,8 @@
         {
             this.FormVisibled = false;
             this.LoadingOn();
-            this.Classes = new ObservableCollection<Classes>(await this.Service.GetPlanForStudies(option));
-            this.ChangeGroupByProperty((Classes c) => c.Type);
+            this.Classes = new ObservableCollection<ExtendedClasses>(await this.Service.GetPlanForStudies(option));
+            this.ChangeGroupByProperty((ExtendedClasses c) => c.Type);
             this.LoadingOff();
         }
 

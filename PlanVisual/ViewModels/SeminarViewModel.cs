@@ -15,8 +15,8 @@
 
     public class SeminarViewModel : ViewModelBase
     {
-        private ObservableCollection<Classes> seminars;
-        private IEnumerable<IGrouping<object, Classes>> groupedSeminars;
+        private ObservableCollection<ExtendedClasses> seminars;
+        private IEnumerable<IGrouping<object, ExtendedClasses>> groupedSeminars;
         private DelegateCommand selectedCommand;
 
         public SeminarViewModel()
@@ -25,7 +25,7 @@
 
         public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
-        public IEnumerable<IGrouping<object, Classes>> GroupedSeminars
+        public IEnumerable<IGrouping<object, ExtendedClasses>> GroupedSeminars
         {
             get
             {
@@ -39,7 +39,7 @@
             }
         }
 
-        public ObservableCollection<Classes> Seminars
+        public ObservableCollection<ExtendedClasses> Seminars
         {
             get
             {
@@ -56,8 +56,8 @@
         private async void Load()
         {
             this.LoadingOn();
-            this.Seminars = new ObservableCollection<Classes>(await this.Service.GetPlanSeminars());
-            this.ChangeGroupByProperty((Classes c) => c.Day);
+            this.Seminars = new ObservableCollection<ExtendedClasses>(await this.Service.GetPlanSeminars());
+            this.ChangeGroupByProperty((ExtendedClasses c) => c.Day);
             this.LoadingOff();
         }
 
