@@ -106,39 +106,36 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\ServiceReference\Plan.ServiceReference.Change.datasource">
+    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.Change.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference\Plan.ServiceReference.Classes.datasource">
+    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.Classes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference\Plan.ServiceReference.PlanSelect.datasource">
+    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.PlanSelect.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference\PlanServices.wsdl" />
-    <None Include="Service References\ServiceReference\PlanServices.xsd">
+    <None Include="Service References\PlanServiceReference\PlanServices.wsdl" />
+    <None Include="Service References\PlanServiceReference\PlanServices.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\PlanServices1.xsd">
+    <None Include="Service References\PlanServiceReference\PlanServices1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\PlanServices2.xsd">
+    <None Include="Service References\PlanServiceReference\PlanServices2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\PlanServices3.xsd">
+    <None Include="Service References\PlanServiceReference\PlanServices3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference\PlanServices4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\PlanServices5.xsd">
+    <None Include="Service References\PlanServiceReference\PlanServices4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses\ExtendedChange.cs" />
     <Compile Include="Enums\NamedErrorType.cs" />
-    <Compile Include="Service References\ServiceReference\Reference.cs">
+    <Compile Include="Service References\PlanServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -162,19 +159,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference\" />
+    <WCFMetadataStorage Include="Service References\PlanServiceReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference\PlanServices.disco" />
+    <None Include="Service References\PlanServiceReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\PlanServiceReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference\Reference.svcmap">
+    <None Include="Service References\PlanServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -1,10 +1,9 @@
 ﻿namespace Plan.Tools
 {
-    using System;
+
     using DataClasses;
     using Enums;
-
-    using Plan.ServiceReference;
+    using PlanServiceReference;
 
     public static class ClassesTools
     {

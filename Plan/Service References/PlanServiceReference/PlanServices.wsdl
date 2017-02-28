@@ -7,7 +7,6 @@
       <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" />
       <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PlanService.Enums" />
-      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IPlanServices_Changes_InputMessage">
@@ -82,5 +81,72 @@
       <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudiesServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_PlanForStudies_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:service name="PlanServices" />
+  <wsdl:binding name="BasicHttpBinding_IPlanServices" type="tns:IPlanServices">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Changes">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/Changes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Seminars">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/Seminars" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Faculties">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/Faculties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StudiesSelects">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/StudiesSelects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PlanForStudies">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/PlanForStudies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PlanServices">
+    <wsdl:port name="BasicHttpBinding_IPlanServices" binding="tns:BasicHttpBinding_IPlanServices">
+      <soap:address location="http://planugservice.azurewebsites.net/PlanServices.svc/soap" />
+    </wsdl:port>
+  </wsdl:service>
 </wsdl:definitions>

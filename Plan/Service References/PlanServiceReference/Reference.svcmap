@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a7820833-e867-418f-836d-5d019274569f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://planugservice.azurewebsites.net/PlanServices.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PlanServices.xsd" MetadataType="Schema" ID="841c73a8-9184-43ef-826d-b5f784a9305a" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" />
+    <MetadataFile FileName="PlanServices1.xsd" MetadataType="Schema" ID="183bf7e8-d799-4136-b63e-2874f66e4455" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd0" />
+    <MetadataFile FileName="PlanServices.wsdl" MetadataType="Wsdl" ID="8546b47c-7e89-41fe-9788-70af9d9059db" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?wsdl" />
+    <MetadataFile FileName="PlanServices2.xsd" MetadataType="Schema" ID="ae872e76-ca40-41b1-95b6-f64eae351dab" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd2" />
+    <MetadataFile FileName="PlanServices3.xsd" MetadataType="Schema" ID="21488655-34ad-49d8-9281-05027f7a6537" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd4" />
+    <MetadataFile FileName="PlanServices4.xsd" MetadataType="Schema" ID="b02eb77e-a443-4d95-bc2b-8f40e09a0aa9" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

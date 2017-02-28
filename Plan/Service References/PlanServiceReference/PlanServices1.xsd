@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" />
+  <xs:element name="Changes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="ChangesResult" nillable="true" type="q1:ArrayOfChange" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Seminars">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SeminarsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="SeminarsResult" nillable="true" type="q2:ArrayOfClasses" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Faculties">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FacultiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="FacultiesResult" nillable="true" type="q3:ArrayOfClasses" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StudiesSelects">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StudiesSelectsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="StudiesSelectsResult" nillable="true" type="q4:ArrayOfPlanSelect" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlanForStudies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="select" nillable="true" type="q5:PlanSelect" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlanForStudiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="PlanForStudiesResult" nillable="true" type="q6:ArrayOfClasses" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

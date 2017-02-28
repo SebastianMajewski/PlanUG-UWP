@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:serviceReference="using:Plan.ServiceReference"
+    xmlns:planServiceReference="using:Plan.PlanServiceReference"
     mc:Ignorable="d"
     d:DesignHeight="600"
     d:DesignWidth="800"
@@ -16,7 +16,7 @@
             <TextBlock Text="Wybierz grupę:" Margin="10,0,0,5"/>
             <ComboBox Name="Combo" ItemsSource="{x:Bind ItemSource}" HorizontalAlignment="Center" Width="180">
                 <ComboBox.ItemTemplate>
-                    <DataTemplate x:DataType="serviceReference:PlanSelect">
+                    <DataTemplate x:DataType="planServiceReference:PlanSelect">
                         <TextBlock Text="{x:Bind Name}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>

@@ -6,7 +6,7 @@
 
     using DataClasses;
 
-    using Plan.ServiceReference;
+    using Plan.PlanServiceReference;
 
     using ExtendedChange = Plan.DataClasses.ExtendedChange;
     using ExtendedClasses = Plan.DataClasses.ExtendedClasses;

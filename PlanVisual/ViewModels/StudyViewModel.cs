@@ -8,7 +8,7 @@
     using Bases;
     using Helpers;
     using Plan.DataClasses;
-    using Plan.ServiceReference;
+    using Plan.PlanServiceReference;
 
     using Prism.Commands;
 

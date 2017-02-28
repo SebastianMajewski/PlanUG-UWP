@@ -6,7 +6,7 @@
     using System.ServiceModel;
     using System.Threading.Tasks;
     using DataClasses;
-    using ServiceReference;
+    using PlanServiceReference;
     using Tools;
 
     public class ServiceConnection : IServiceConnection

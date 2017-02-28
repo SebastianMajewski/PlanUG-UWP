@@ -2,15 +2,11 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.ServiceModel;
-
     using Windows.UI.Popups;
-
     using Bases;
     using Plan.DataClasses;
-    using Plan.ServiceReference;
-
+    using Plan.PlanServiceReference;
     using Prism.Commands;
     using Tools;
 

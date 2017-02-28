@@ -7,14 +7,14 @@
     xmlns:controls="using:PlanVisual.Controls"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:behaviours="using:PlanVisual.Behaviours"
-    xmlns:serviceReference="using:Plan.ServiceReference"
+    xmlns:planServiceReference="using:Plan.PlanServiceReference"
     mc:Ignorable="d"
     Header="Zmiany">
     <interactivity:Interaction.Behaviors>
         <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
     </interactivity:Interaction.Behaviors>
     <PivotItem.Resources>
-        <DataTemplate x:DataType="serviceReference:Change" x:Key="SelectedChangesTemplate">
+        <DataTemplate x:DataType="planServiceReference:Change" x:Key="SelectedChangesTemplate">
             <StackPanel Margin="0,10,0,10">
                 <TextBlock Text="{x:Bind Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
                 <Grid>
@@ -47,7 +47,7 @@
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate x:DataType="serviceReference:Change" x:Key="ChangesTemplate">
+        <DataTemplate x:DataType="planServiceReference:Change" x:Key="ChangesTemplate">
             <StackPanel Margin="0,10,0,10">
                 <TextBlock Text="{x:Bind Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
                 <Grid>

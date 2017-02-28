@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PlanService.Enums" />
+  <xs:complexType name="ArrayOfChange">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Change" nillable="true" type="tns:Change" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfChange" nillable="true" type="tns:ArrayOfChange" />
+  <xs:complexType name="Change">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Changes" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PlanService.Enums" minOccurs="0" name="ClassesType" type="q1:ClassesType" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lecturer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Change" nillable="true" type="tns:Change" />
+  <xs:complexType name="ArrayOfClasses">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Classes" nillable="true" type="tns:Classes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClasses" nillable="true" type="tns:ArrayOfClasses" />
+  <xs:complexType name="Classes">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateTo" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PlanService.Enums" minOccurs="0" name="Day" type="q2:Day" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HourFrom" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HourTo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lecturer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Room" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PlanService.Enums" minOccurs="0" name="Type" type="q3:ClassesType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Classes" nillable="true" type="tns:Classes" />
+  <xs:complexType name="ArrayOfPlanSelect">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PlanSelect" nillable="true" type="tns:PlanSelect" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlanSelect" nillable="true" type="tns:ArrayOfPlanSelect" />
+  <xs:complexType name="PlanSelect">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LinkSuffix" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlanSelect" nillable="true" type="tns:PlanSelect" />
+</xs:schema>
