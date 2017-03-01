@@ -107,6 +107,12 @@
     <Compile Include="Controls\BusyIndicator.xaml.cs">
       <DependentUpon>BusyIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlanGridHeader.xaml.cs">
+      <DependentUpon>PlanGridHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PlanGridTile.xaml.cs">
+      <DependentUpon>PlanGridTile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\StudiesOptionsForm.xaml.cs">
       <DependentUpon>StudiesOptionsForm.xaml</DependentUpon>
     </Compile>
@@ -115,6 +121,7 @@
     <Compile Include="Converters\IsNullOrEmptyToVisibilityConverter.cs" />
     <Compile Include="Helpers\TypeHelpers.cs" />
     <Compile Include="Tools\Improver.cs" />
+    <Compile Include="Tools\PlanGrid.cs" />
     <Compile Include="ViewModels\ChangesViewModel.cs" />
     <Compile Include="ViewModels\FacultyViewModel.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
@@ -166,6 +173,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\BusyIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PlanGridHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PlanGridTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

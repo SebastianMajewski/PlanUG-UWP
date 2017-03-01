@@ -93,7 +93,7 @@
             }
             else
             {
-                interval.TimeTo = TimeSpan.Parse(to);
+                interval.TimeTo = TimeSpan.Parse(to) + TimeSpan.FromHours(1);
             }
 
             return interval;
