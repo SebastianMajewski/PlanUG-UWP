@@ -102,7 +102,7 @@
                 </Grid.RowDefinitions>
                 <SemanticZoom ScrollViewer.ZoomMode="Enabled">
                     <SemanticZoom.ZoomedOutView>
-                        <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  ItemsSource="{x:Bind GroupedClassesCvs.View.CollectionGroups, Mode=OneWay}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" >
+                        <ListView VerticalAlignment="Center" ItemsSource="{x:Bind GroupedClassesCvs.View.CollectionGroups, Mode=OneWay}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock 
@@ -115,6 +115,8 @@
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="VerticalAlignment" Value="Center"/>
                                     <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
                                 </Style>
                             </ListView.ItemContainerStyle>
                         </ListView>

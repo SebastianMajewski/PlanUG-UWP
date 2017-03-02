@@ -20,6 +20,7 @@
         private ObservableCollection<ExtendedClasses> seminars;
         private IEnumerable<IGrouping<object, ExtendedClasses>> groupedSeminars;
         private DelegateCommand selectedCommand;
+        private string filter;
 
         public SeminarViewModel()
         {
@@ -55,6 +56,24 @@
             }
         }
 
+        public string Filter
+        {
+            get
+            {
+                return this.filter ?? "Subject";
+            }
+
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.filter = value;
+                    this.ChangeGroupByProperty(value);
+                    this.OnPropertyChanged(() => this.Filter);
+                }
+            }
+        }
+
         private async void Load()
         {
             this.LoadingOn();
@@ -64,7 +83,7 @@
                 Improver.LecturerSplit(f);
             }
 
-            this.ChangeGroupByProperty((ExtendedClasses c) => c.StartsAt);
+            this.ChangeGroupByProperty(this.Filter);
             this.LoadingOff();
         }
 

@@ -18,6 +18,7 @@
         private ObservableCollection<ExtendedClasses> faculties;
         private IEnumerable<IGrouping<object, ExtendedClasses>> groupedFaculty;
         private DelegateCommand selectedCommand;
+        private string filter;
 
         public FacultyViewModel()
         {
@@ -36,6 +37,24 @@
             {
                 this.faculties = value;
                 this.OnPropertyChanged(() => this.Faculties);
+            }
+        }
+
+        public string Filter
+        {
+            get
+            {
+                return this.filter ?? "Subject";
+            }
+
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.filter = value;
+                    this.ChangeGroupByProperty(value);
+                    this.OnPropertyChanged(() => this.Filter);
+                }
             }
         }
 
@@ -62,7 +81,7 @@
                 Improver.LecturerSplit(f);
             }
 
-            this.ChangeGroupByProperty((ExtendedClasses c) => c.Type);
+            this.ChangeGroupByProperty(this.Filter);
             this.LoadingOff();
         }
 
