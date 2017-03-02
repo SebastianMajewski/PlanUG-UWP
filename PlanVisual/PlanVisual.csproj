@@ -117,8 +117,10 @@
       <DependentUpon>StudiesOptionsForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsSelectedToPropertyStringConverter.cs" />
     <Compile Include="Converters\NotNullToBooleanConverter.cs" />
     <Compile Include="Converters\IsNullOrEmptyToVisibilityConverter.cs" />
+    <Compile Include="Helpers\BindingProxy.cs" />
     <Compile Include="Helpers\TypeHelpers.cs" />
     <Compile Include="Tools\Improver.cs" />
     <Compile Include="Tools\PlanGrid.cs" />

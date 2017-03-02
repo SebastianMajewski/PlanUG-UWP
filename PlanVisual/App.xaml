@@ -8,6 +8,7 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:IsNullOrEmptyToVisibilityConverter x:Key="IsNullOrEmptyToVisibilityConverter"/>
         <converters:NotNullToBooleanConverter x:Key="NotNullToBooleanConverter"/>
+        <converters:IsSelectedToPropertyStringConverter x:Key="IsSelectedToPropertyStringConverter"/>
     </Application.Resources>
 </Application>
 

@@ -64,7 +64,7 @@
                 Improver.LecturerSplit(f);
             }
 
-            this.ChangeGroupByProperty((ExtendedClasses c) => c.Day);
+            this.ChangeGroupByProperty((ExtendedClasses c) => c.StartsAt);
             this.LoadingOff();
         }
 

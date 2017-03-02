@@ -91,21 +91,41 @@
         <CollectionViewSource x:Key="GroupedFacultyCvs" x:Name="GroupedFacultyCvs" IsSourceGrouped="True" Source="{Binding GroupedFaculty, Mode=OneWay}"/>
     </PivotItem.Resources>
     <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
-        <ScrollViewer>
-            <ListView ItemsSource="{x:Bind GroupedFacultyCvs.View, Mode=OneWay}" Background="Transparent">
-                <interactivity:Interaction.Behaviors>
-                    <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
-                </interactivity:Interaction.Behaviors>
-                <ListView.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                    </GroupStyle>
-                </ListView.GroupStyle>
-            </ListView>
-        </ScrollViewer>
+        <SemanticZoom ScrollViewer.ZoomMode="Enabled">
+            <SemanticZoom.ZoomedOutView>
+                <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  ItemsSource="{x:Bind GroupedFacultyCvs.View.CollectionGroups, Mode=OneWay}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock 
+                                Text="{Binding Group.Key}" 
+                                FontFamily="Segoe UI" FontWeight="Light" 
+                                FontSize="24"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </SemanticZoom.ZoomedOutView>
+            <SemanticZoom.ZoomedInView>
+                <ListView ItemsSource="{x:Bind GroupedFacultyCvs.View, Mode=OneWay}" Background="Transparent">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
+                    </interactivity:Interaction.Behaviors>
+                    <ListView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ListView.GroupStyle>
+                </ListView>
+            </SemanticZoom.ZoomedInView>
+        </SemanticZoom>
     </controls:BusyIndicator>
 </PivotItem>

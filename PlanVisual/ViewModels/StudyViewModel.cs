@@ -22,6 +22,7 @@
         private DelegateCommand selectedCommand;
         private DelegateCommand<PlanSelect> applyCommand;
         private bool formVisibled;
+        private string filter;
 
         public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
@@ -83,6 +84,24 @@
             }
         }
 
+        public string Filter
+        {
+            get
+            {
+                return this.filter ?? "Subject";
+            }
+
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    this.filter = value;
+                    this.ChangeGroupByProperty(value);
+                    this.OnPropertyChanged(() => this.Filter);
+                }
+            }
+        }
+
         private async void Load()
         {
             this.LoadingOn();
@@ -101,7 +120,7 @@
                 Improver.LecturerSplit(f);
             }
 
-            this.ChangeGroupByProperty((ExtendedClasses c) => c.Type);
+            this.ChangeGroupByProperty(this.Filter);
             this.LoadingOff();
         }
 
@@ -115,7 +134,8 @@
 
         private void ChangeGroupByProperty<T, TP>(Expression<Func<T, TP>> expression) where T : class
         {
-            this.ChangeGroupByProperty(TypeHelpers.PropertyName(expression));
+            // this.ChangeGroupByProperty(TypeHelpers.PropertyName(expression));
+            this.Filter = TypeHelpers.PropertyName(expression);
         }
     }
 }

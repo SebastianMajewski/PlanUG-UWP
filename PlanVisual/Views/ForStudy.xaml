@@ -8,7 +8,9 @@
     xmlns:behaviours="using:PlanVisual.Behaviours"
     xmlns:dataClasses="using:Plan.DataClasses"
     xmlns:controls="using:PlanVisual.Controls"
+    xmlns:helpers="using:PlanVisual.Helpers"
     mc:Ignorable="d"
+    Name="ForStudyPivot"
     Header="Dla Kierunku">
     <interactivity:Interaction.Behaviors>
         <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
@@ -89,25 +91,70 @@
             </StackPanel>
         </DataTemplate>
         <CollectionViewSource x:Key="GroupedClassesCvs" x:Name="GroupedClassesCvs" IsSourceGrouped="True" Source="{Binding GroupedClasses, Mode=OneWay}"/>
+        <helpers:BindingProxy x:Key="Proxy"  Data="{Binding ElementName=ForStudyPivot, Path=DataContext}"/>
     </PivotItem.Resources>
     <Grid>
         <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
-            <ScrollViewer>
-                <ListView ItemsSource="{x:Bind GroupedClassesCvs.View, Mode=OneWay}" Background="Transparent">
-                    <interactivity:Interaction.Behaviors>
-                        <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
-                    </interactivity:Interaction.Behaviors>
-                    <ListView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <SemanticZoom ScrollViewer.ZoomMode="Enabled">
+                    <SemanticZoom.ZoomedOutView>
+                        <ListView HorizontalAlignment="Center" VerticalAlignment="Center"  ItemsSource="{x:Bind GroupedClassesCvs.View.CollectionGroups, Mode=OneWay}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" >
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                    <TextBlock 
+                                Text="{Binding Group.Key}" 
+                                FontFamily="Segoe UI" FontWeight="Light" 
+                                FontSize="24"/>
                                 </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                        </GroupStyle>
-                    </ListView.GroupStyle>
-                </ListView>
-            </ScrollViewer>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </SemanticZoom.ZoomedOutView>
+                    <SemanticZoom.ZoomedInView>
+                        <ListView ItemsSource="{x:Bind GroupedClassesCvs.View, Mode=OneWay}" Background="Transparent">
+                            <interactivity:Interaction.Behaviors>
+                                <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
+                            </interactivity:Interaction.Behaviors>
+                            <ListView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                </GroupStyle>
+                            </ListView.GroupStyle>
+                        </ListView>
+                    </SemanticZoom.ZoomedInView>
+                </SemanticZoom>
+                <CommandBar Grid.Row="1">
+                    <AppBarButton Icon="Filter" Label="Grupowanie">
+                        <AppBarButton.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <RadioButton Content="Przedmiot" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Subject, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Prowadzący" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Lecturer, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Dzień" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Day, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Sala" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Room, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Typ zajęć" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Type, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Grupa" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Group, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Godzina" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=StartsAt, Source={StaticResource Proxy}}"/>
+                                </StackPanel>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                    <AppBarButton Icon="People" Label="Zmień grupę" Command="{Binding Data.SelectedCommand, Source={StaticResource Proxy}}"/>
+                </CommandBar>
+            </Grid>
         </controls:BusyIndicator>
         <controls:StudiesOptionsForm Visibility="{Binding FormVisibled, Converter={StaticResource BooleanToVisibilityConverter}}" ApplyCommand="{Binding ApplyCommand}" ItemSource="{Binding Options}"/>
     </Grid>
