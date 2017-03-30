@@ -7,6 +7,7 @@
       <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" />
       <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PlanService.Enums" />
+      <xsd:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IPlanServices_Changes_InputMessage">
@@ -54,6 +55,24 @@
   <wsdl:message name="IPlanServices_PlanForStudies_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q5:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IPlanServices_StudentSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:StudentSettings" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_StudentSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StudentSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_StudentSettings_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q6:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_PlanForStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:PlanForStudent" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_PlanForStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PlanForStudentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPlanServices_PlanForStudent_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/PlanService.Exceptions" name="detail" element="q7:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IPlanServices">
     <wsdl:operation name="Changes">
       <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/Changes" message="tns:IPlanServices_Changes_InputMessage" />
@@ -79,6 +98,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudies" message="tns:IPlanServices_PlanForStudies_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudiesResponse" message="tns:IPlanServices_PlanForStudies_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudiesServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_PlanForStudies_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StudentSettings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/StudentSettings" message="tns:IPlanServices_StudentSettings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/StudentSettingsResponse" message="tns:IPlanServices_StudentSettings_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/StudentSettingsServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_StudentSettings_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlanForStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudent" message="tns:IPlanServices_PlanForStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudentResponse" message="tns:IPlanServices_PlanForStudent_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPlanServices/PlanForStudentServiceFaultFault" name="ServiceFaultFault" message="tns:IPlanServices_PlanForStudent_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IPlanServices" type="tns:IPlanServices">
@@ -133,6 +162,30 @@
     </wsdl:operation>
     <wsdl:operation name="PlanForStudies">
       <soap:operation soapAction="http://tempuri.org/IPlanServices/PlanForStudies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="StudentSettings">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/StudentSettings" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PlanForStudent">
+      <soap:operation soapAction="http://tempuri.org/IPlanServices/PlanForStudent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

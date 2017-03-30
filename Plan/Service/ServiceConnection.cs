@@ -46,19 +46,21 @@
 
         public async Task<List<ExtendedChange>> GetChanges()
         {
-            var classes = await this.client.ChangesAsync();
-            return classes.Select(this.ToExtendedChange).ToList();
+            var changes = await this.client.ChangesAsync();
+            return changes.Select(this.ToExtendedChange).ToList();
         }
 
-        // public async Task<List<Setting>> GetSettings()
-        // {
-        //     throw new NotImplementedException();
-        // }
+        public async Task<List<Setting>> GetSettings()
+        {
+            return (await this.client.StudentSettingsAsync()).ToList();
+        }
 
-        // public async Task<List<Classes>> GetPlanForStudent(PlanForStudentSetting setting)
-        // {
-        //     throw new NotImplementedException();
-        // }
+        public async Task<List<ExtendedClasses>> GetPlanForStudent(PlanForStudentSetting setting)
+        {
+            var classes = await this.client.PlanForStudentAsync(setting);
+            return classes.Select(this.ToExtendedClasses).ToList();
+        }
+
         private ExtendedClasses ToExtendedClasses(Classes classes)
         {
             return new ExtendedClasses

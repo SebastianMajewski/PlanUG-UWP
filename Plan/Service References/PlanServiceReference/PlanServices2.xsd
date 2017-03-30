@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/PlanService.Enums" />
+  <xs:import schemaLocation="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="ArrayOfChange">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Change" nillable="true" type="tns:Change" />
@@ -51,4 +52,76 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlanSelect" nillable="true" type="tns:PlanSelect" />
+  <xs:complexType name="ArrayOfSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Setting" nillable="true" type="tns:Setting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSetting" nillable="true" type="tns:ArrayOfSetting" />
+  <xs:complexType name="Setting">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Faculties" nillable="true" type="tns:ArrayOfPlanSelect" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Lectorates" nillable="true" type="q4:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Params" nillable="true" type="tns:GetMethodParams" />
+      <xs:element minOccurs="0" name="Seminars" nillable="true" type="tns:ArrayOfPlanSelect" />
+      <xs:element minOccurs="0" name="Specjalizations" nillable="true" type="tns:ArrayOfSpecialization" />
+      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Setting" nillable="true" type="tns:Setting" />
+  <xs:complexType name="GetMethodParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fak" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fal" type="xs:boolean" />
+      <xs:element minOccurs="0" name="fam" type="xs:boolean" />
+      <xs:element minOccurs="0" name="hum" type="xs:boolean" />
+      <xs:element minOccurs="0" name="kur" type="xs:boolean" />
+      <xs:element minOccurs="0" name="mon" type="xs:boolean" />
+      <xs:element minOccurs="0" name="se1" type="xs:boolean" />
+      <xs:element minOccurs="0" name="se2" type="xs:boolean" />
+      <xs:element minOccurs="0" name="sel" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetMethodParams" nillable="true" type="tns:GetMethodParams" />
+  <xs:complexType name="ArrayOfSpecialization">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Specialization" nillable="true" type="tns:Specialization" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSpecialization" nillable="true" type="tns:ArrayOfSpecialization" />
+  <xs:complexType name="Specialization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Groups" nillable="true" type="tns:ArrayOfGroup" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Specialization" nillable="true" type="tns:Specialization" />
+  <xs:complexType name="ArrayOfGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Group" nillable="true" type="tns:Group" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGroup" nillable="true" type="tns:ArrayOfGroup" />
+  <xs:complexType name="Group">
+    <xs:sequence>
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Lectorates" nillable="true" type="q5:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Group" nillable="true" type="tns:Group" />
+  <xs:complexType name="PlanForStudentSetting">
+    <xs:sequence>
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Faculties" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element minOccurs="0" name="FacultyPrefix" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lectorate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Seminar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SeminarPrefix" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Speciality" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlanForStudentSetting" nillable="true" type="tns:PlanForStudentSetting" />
 </xs:schema>

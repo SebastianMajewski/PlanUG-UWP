@@ -34,5 +34,15 @@
         [FaultContract(typeof(ServiceFault))]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "PlanForStudies")]
         List<Classes> PlanForStudies(PlanSelect select);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "StudentSettings")]
+        [FaultContract(typeof(ServiceFault))]
+        List<Setting> StudentSettings();
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceFault))]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "PlanForStudent")]
+        List<Classes> PlanForStudent(PlanForStudentSetting setting);
     }
 }

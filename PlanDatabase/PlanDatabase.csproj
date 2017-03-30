@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{16675D81-92DE-47E2-8BD7-7E3507F5747F}</ProjectGuid>
+    <ProjectGuid>{319876F3-DE7E-453C-85E4-75FA28659349}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plan</RootNamespace>
-    <AssemblyName>Plan</AssemblyName>
+    <RootNamespace>PlanDatabase</RootNamespace>
+    <AssemblyName>PlanDatabase</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -105,79 +105,25 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
-    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.Change.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.Classes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.PlanSelect.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\PlanServiceReference\Plan.PlanServiceReference.Setting.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\PlanServiceReference\PlanServices.wsdl" />
-    <None Include="Service References\PlanServiceReference\PlanServices.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PlanServiceReference\PlanServices1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PlanServiceReference\PlanServices2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PlanServiceReference\PlanServices3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PlanServiceReference\PlanServices4.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataClasses\ExtendedChange.cs" />
-    <Compile Include="Enums\NamedErrorType.cs" />
-    <Compile Include="Service References\PlanServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service\IServiceConnection.cs" />
-    <Compile Include="DataClasses\ExtendedClasses.cs" />
-    <Compile Include="DataClasses\ClassesTypeObject.cs" />
-    <Compile Include="Enums\NamedClassesType.cs" />
-    <Compile Include="Enums\NamedDay.cs" />
-    <Compile Include="DataClasses\DayObject.cs" />
-    <Compile Include="Service\ServiceConnection.cs" />
+    <Compile Include="Entities\DatabaseClasses.cs" />
+    <Compile Include="Entities\StudentSetting.cs" />
+    <Compile Include="PlanDatabase.cs" />
+    <Compile Include="PlanRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataClasses\TimeInterval.cs" />
-    <Compile Include="Tools\ClassesTools.cs" />
-    <Compile Include="Tools\DayTools.cs" />
-    <Compile Include="Tools\EnumTools.cs" />
-    <Compile Include="Tools\TimeTools.cs" />
-    <EmbeddedResource Include="Properties\Plan.rd.xml" />
+    <EmbeddedResource Include="Properties\PlanDatabase.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <SDKReference Include="SQLite.UWP.2015, Version=3.17.0">
+      <Name>SQLite for Universal Windows Platform</Name>
+    </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\PlanServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\PlanServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\PlanServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\PlanServiceReference\PlanServices5.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PlanServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\Plan\Plan.csproj">
+      <Project>{16675d81-92de-47e2-8bd7-7e3507f5747f}</Project>
+      <Name>Plan</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -25,6 +25,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="PlanServices.xsd" MetadataType="Schema" ID="841c73a8-9184-43ef-826d-b5f784a9305a" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd3" />
+    <MetadataFile FileName="PlanServices5.xsd" MetadataType="Schema" ID="e98afd2b-3129-4765-80fc-641b6d377a2f" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd5" />
     <MetadataFile FileName="PlanServices1.xsd" MetadataType="Schema" ID="183bf7e8-d799-4136-b63e-2874f66e4455" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd0" />
     <MetadataFile FileName="PlanServices.wsdl" MetadataType="Wsdl" ID="8546b47c-7e89-41fe-9788-70af9d9059db" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?wsdl" />
     <MetadataFile FileName="PlanServices2.xsd" MetadataType="Schema" ID="ae872e76-ca40-41b1-95b6-f64eae351dab" SourceId="1" SourceUrl="http://planugservice.azurewebsites.net/PlanServices.svc?xsd=xsd2" />

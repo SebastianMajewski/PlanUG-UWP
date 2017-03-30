@@ -63,4 +63,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="StudentSettings">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StudentSettingsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="StudentSettingsResult" nillable="true" type="q7:ArrayOfSetting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlanForStudent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="setting" nillable="true" type="q8:PlanForStudentSetting" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlanForStudentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/PlanService.DataClasses" minOccurs="0" name="PlanForStudentResult" nillable="true" type="q9:ArrayOfClasses" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

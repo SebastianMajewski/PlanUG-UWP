@@ -471,6 +471,516 @@ namespace Plan.PlanServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Setting", Namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses")]
+    public partial class Setting : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.Generic.List<Plan.PlanServiceReference.PlanSelect> FacultiesField;
+        
+        private System.Collections.Generic.List<string> LectoratesField;
+        
+        private string NameField;
+        
+        private Plan.PlanServiceReference.GetMethodParams ParamsField;
+        
+        private System.Collections.Generic.List<Plan.PlanServiceReference.PlanSelect> SeminarsField;
+        
+        private System.Collections.Generic.List<Plan.PlanServiceReference.Specialization> SpecjalizationsField;
+        
+        private string SymbolField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Plan.PlanServiceReference.PlanSelect> Faculties {
+            get {
+                return this.FacultiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FacultiesField, value) != true)) {
+                    this.FacultiesField = value;
+                    this.RaisePropertyChanged("Faculties");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<string> Lectorates {
+            get {
+                return this.LectoratesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LectoratesField, value) != true)) {
+                    this.LectoratesField = value;
+                    this.RaisePropertyChanged("Lectorates");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Plan.PlanServiceReference.GetMethodParams Params {
+            get {
+                return this.ParamsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParamsField, value) != true)) {
+                    this.ParamsField = value;
+                    this.RaisePropertyChanged("Params");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Plan.PlanServiceReference.PlanSelect> Seminars {
+            get {
+                return this.SeminarsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeminarsField, value) != true)) {
+                    this.SeminarsField = value;
+                    this.RaisePropertyChanged("Seminars");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Plan.PlanServiceReference.Specialization> Specjalizations {
+            get {
+                return this.SpecjalizationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SpecjalizationsField, value) != true)) {
+                    this.SpecjalizationsField = value;
+                    this.RaisePropertyChanged("Specjalizations");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Symbol {
+            get {
+                return this.SymbolField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SymbolField, value) != true)) {
+                    this.SymbolField = value;
+                    this.RaisePropertyChanged("Symbol");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetMethodParams", Namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses")]
+    public partial class GetMethodParams : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private bool fakField;
+        
+        private bool falField;
+        
+        private bool famField;
+        
+        private bool humField;
+        
+        private bool kurField;
+        
+        private bool monField;
+        
+        private bool se1Field;
+        
+        private bool se2Field;
+        
+        private bool selField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool fak {
+            get {
+                return this.fakField;
+            }
+            set {
+                if ((this.fakField.Equals(value) != true)) {
+                    this.fakField = value;
+                    this.RaisePropertyChanged("fak");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool fal {
+            get {
+                return this.falField;
+            }
+            set {
+                if ((this.falField.Equals(value) != true)) {
+                    this.falField = value;
+                    this.RaisePropertyChanged("fal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool fam {
+            get {
+                return this.famField;
+            }
+            set {
+                if ((this.famField.Equals(value) != true)) {
+                    this.famField = value;
+                    this.RaisePropertyChanged("fam");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool hum {
+            get {
+                return this.humField;
+            }
+            set {
+                if ((this.humField.Equals(value) != true)) {
+                    this.humField = value;
+                    this.RaisePropertyChanged("hum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool kur {
+            get {
+                return this.kurField;
+            }
+            set {
+                if ((this.kurField.Equals(value) != true)) {
+                    this.kurField = value;
+                    this.RaisePropertyChanged("kur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool mon {
+            get {
+                return this.monField;
+            }
+            set {
+                if ((this.monField.Equals(value) != true)) {
+                    this.monField = value;
+                    this.RaisePropertyChanged("mon");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool se1 {
+            get {
+                return this.se1Field;
+            }
+            set {
+                if ((this.se1Field.Equals(value) != true)) {
+                    this.se1Field = value;
+                    this.RaisePropertyChanged("se1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool se2 {
+            get {
+                return this.se2Field;
+            }
+            set {
+                if ((this.se2Field.Equals(value) != true)) {
+                    this.se2Field = value;
+                    this.RaisePropertyChanged("se2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool sel {
+            get {
+                return this.selField;
+            }
+            set {
+                if ((this.selField.Equals(value) != true)) {
+                    this.selField = value;
+                    this.RaisePropertyChanged("sel");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Specialization", Namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses")]
+    public partial class Specialization : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.Generic.List<Plan.PlanServiceReference.Group> GroupsField;
+        
+        private string NameField;
+        
+        private string SymbolField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<Plan.PlanServiceReference.Group> Groups {
+            get {
+                return this.GroupsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupsField, value) != true)) {
+                    this.GroupsField = value;
+                    this.RaisePropertyChanged("Groups");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Symbol {
+            get {
+                return this.SymbolField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SymbolField, value) != true)) {
+                    this.SymbolField = value;
+                    this.RaisePropertyChanged("Symbol");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Group", Namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses")]
+    public partial class Group : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.Generic.List<string> LectoratesField;
+        
+        private string NumberField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<string> Lectorates {
+            get {
+                return this.LectoratesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LectoratesField, value) != true)) {
+                    this.LectoratesField = value;
+                    this.RaisePropertyChanged("Lectorates");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Number {
+            get {
+                return this.NumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NumberField, value) != true)) {
+                    this.NumberField = value;
+                    this.RaisePropertyChanged("Number");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlanForStudentSetting", Namespace="http://schemas.datacontract.org/2004/07/PlanService.DataClasses")]
+    public partial class PlanForStudentSetting : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private System.Collections.Generic.List<string> FacultiesField;
+        
+        private string FacultyPrefixField;
+        
+        private string GroupField;
+        
+        private string LectorateField;
+        
+        private string SeminarField;
+        
+        private string SeminarPrefixField;
+        
+        private string SpecialityField;
+        
+        private string SymbolField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<string> Faculties {
+            get {
+                return this.FacultiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FacultiesField, value) != true)) {
+                    this.FacultiesField = value;
+                    this.RaisePropertyChanged("Faculties");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FacultyPrefix {
+            get {
+                return this.FacultyPrefixField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FacultyPrefixField, value) != true)) {
+                    this.FacultyPrefixField = value;
+                    this.RaisePropertyChanged("FacultyPrefix");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Group {
+            get {
+                return this.GroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GroupField, value) != true)) {
+                    this.GroupField = value;
+                    this.RaisePropertyChanged("Group");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Lectorate {
+            get {
+                return this.LectorateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LectorateField, value) != true)) {
+                    this.LectorateField = value;
+                    this.RaisePropertyChanged("Lectorate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Seminar {
+            get {
+                return this.SeminarField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeminarField, value) != true)) {
+                    this.SeminarField = value;
+                    this.RaisePropertyChanged("Seminar");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SeminarPrefix {
+            get {
+                return this.SeminarPrefixField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeminarPrefixField, value) != true)) {
+                    this.SeminarPrefixField = value;
+                    this.RaisePropertyChanged("SeminarPrefix");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Speciality {
+            get {
+                return this.SpecialityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SpecialityField, value) != true)) {
+                    this.SpecialityField = value;
+                    this.RaisePropertyChanged("Speciality");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Symbol {
+            get {
+                return this.SymbolField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SymbolField, value) != true)) {
+                    this.SymbolField = value;
+                    this.RaisePropertyChanged("Symbol");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PlanServiceReference.IPlanServices")]
     public interface IPlanServices {
@@ -494,6 +1004,14 @@ namespace Plan.PlanServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlanServices/PlanForStudies", ReplyAction="http://tempuri.org/IPlanServices/PlanForStudiesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Plan.PlanServiceReference.ServiceFault), Action="http://tempuri.org/IPlanServices/PlanForStudiesServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/PlanService.Exceptions")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<Plan.PlanServiceReference.Classes>> PlanForStudiesAsync(Plan.PlanServiceReference.PlanSelect select);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlanServices/StudentSettings", ReplyAction="http://tempuri.org/IPlanServices/StudentSettingsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Plan.PlanServiceReference.ServiceFault), Action="http://tempuri.org/IPlanServices/StudentSettingsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/PlanService.Exceptions")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Plan.PlanServiceReference.Setting>> StudentSettingsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPlanServices/PlanForStudent", ReplyAction="http://tempuri.org/IPlanServices/PlanForStudentResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Plan.PlanServiceReference.ServiceFault), Action="http://tempuri.org/IPlanServices/PlanForStudentServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/PlanService.Exceptions")]
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Plan.PlanServiceReference.Classes>> PlanForStudentAsync(Plan.PlanServiceReference.PlanForStudentSetting setting);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -557,6 +1075,14 @@ namespace Plan.PlanServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.List<Plan.PlanServiceReference.Classes>> PlanForStudiesAsync(Plan.PlanServiceReference.PlanSelect select) {
             return base.Channel.PlanForStudiesAsync(select);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Plan.PlanServiceReference.Setting>> StudentSettingsAsync() {
+            return base.Channel.StudentSettingsAsync();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Plan.PlanServiceReference.Classes>> PlanForStudentAsync(Plan.PlanServiceReference.PlanForStudentSetting setting) {
+            return base.Channel.PlanForStudentAsync(setting);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

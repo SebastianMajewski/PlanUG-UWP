@@ -17,7 +17,7 @@
 
         Task<List<ExtendedClasses>> GetPlanFaculty();
 
-        //Task<List<ExtendedClasses>> GetPlanForStudent(PlanForStudentSetting setting);
+        Task<List<ExtendedClasses>> GetPlanForStudent(PlanForStudentSetting setting);
 
         Task<List<ExtendedClasses>> GetPlanForStudies(PlanSelect so);
 
@@ -25,6 +25,6 @@
 
         Task<List<ExtendedClasses>> GetPlanSeminars();
 
-        //Task<List<Setting>> GetSettings();
+        Task<List<Setting>> GetSettings();
     }
 }

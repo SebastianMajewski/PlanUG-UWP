@@ -64,6 +64,18 @@
             } 
         }
 
+        public List<Setting> StudentSettings()
+        {
+            try
+            {
+                return this.downloader.DownloadSettings().Result;
+            }
+            catch (AggregateException e)
+            {
+                throw e.InnerExceptions.FirstOrDefault() ?? new Exception();
+            }
+        }
+
         public List<Classes> PlanForStudies(PlanSelect select)
         {
             try
@@ -74,6 +86,18 @@
             {
                 throw e.InnerExceptions.FirstOrDefault() ?? new Exception();
             } 
+        }
+
+        public List<Classes> PlanForStudent(PlanForStudentSetting setting)
+        {
+            try
+            {
+                return this.downloader.DownloadPlanForStudent(setting).Result;
+            }
+            catch (AggregateException e)
+            {
+                throw e.InnerExceptions.FirstOrDefault() ?? new Exception();
+            }
         }
     }
 }
