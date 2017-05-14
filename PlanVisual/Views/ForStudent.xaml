@@ -1,10 +1,162 @@
-﻿<PivotItem
+﻿<controls:NamedPivotItem
     x:Class="PlanVisual.Views.ForStudent"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviours="using:PlanVisual.Behaviours"
+    xmlns:dataClasses="using:Plan.DataClasses"
+    xmlns:helpers="using:PlanVisual.Helpers"
+    xmlns:controls="using:PlanVisual.Controls"
     mc:Ignorable="d"
     Header="Dla Studenta">
-    
-</PivotItem>
+    <interactivity:Interaction.Behaviors>
+        <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
+    </interactivity:Interaction.Behaviors>
+    <controls:NamedPivotItem.Resources>
+        <DataTemplate x:DataType="dataClasses:ExtendedClasses" x:Key="SelectedClassesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" Visibility="{x:Bind Subject, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid Visibility="{x:Bind Lecturer, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Day, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Dzień:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Day}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Godziny:"/>
+                    <TextBlock Text="{x:Bind Hours}" Grid.Column="1" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Room, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Pokój / Aula:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Room}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Comments, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Komentarze:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Comments}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="dataClasses:ExtendedClasses" x:Key="ClassesTemplate">
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock Text="{x:Bind Subject}" Visibility="{x:Bind Subject, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
+                <Grid Visibility="{x:Bind Lecturer, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Prowadzący:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+                <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Grupa:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Group}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <CollectionViewSource x:Key="GroupedClassesCvs" x:Name="GroupedClassesCvs" IsSourceGrouped="True" Source="{Binding GroupedClasses, Mode=OneWay}"/>
+        <helpers:BindingProxy x:Key="Proxy"  Data="{Binding ElementName=ForStudyPivot, Path=DataContext}"/>
+    </controls:NamedPivotItem.Resources>
+    <Grid>
+        <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <SemanticZoom ScrollViewer.ZoomMode="Enabled">
+                    <SemanticZoom.ZoomedOutView>
+                        <ListView VerticalAlignment="Center" ItemsSource="{x:Bind GroupedClassesCvs.View.CollectionGroups, Mode=OneWay}" ScrollViewer.IsHorizontalScrollChainingEnabled="False" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                Text="{Binding Group.Key}" 
+                                FontFamily="Segoe UI" FontWeight="Light" 
+                                FontSize="24"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </SemanticZoom.ZoomedOutView>
+                    <SemanticZoom.ZoomedInView>
+                        <ListView ItemsSource="{x:Bind GroupedClassesCvs.View, Mode=OneWay}" Background="Transparent">
+                            <interactivity:Interaction.Behaviors>
+                                <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
+                            </interactivity:Interaction.Behaviors>
+                            <ListView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                </GroupStyle>
+                            </ListView.GroupStyle>
+                        </ListView>
+                    </SemanticZoom.ZoomedInView>
+                </SemanticZoom>
+                <CommandBar Grid.Row="1">
+                    <AppBarButton Icon="Filter" Label="Grupowanie">
+                        <AppBarButton.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <RadioButton Content="Przedmiot" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Subject, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Prowadzący" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Lecturer, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Dzień" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Day, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Sala" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Room, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Typ zajęć" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Type, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Grupa" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=Group, Source={StaticResource Proxy}}"/>
+                                    <RadioButton Content="Godzina" GroupName="Filters" IsChecked="{Binding Data.Filter, Mode=TwoWay, Converter={StaticResource IsSelectedToPropertyStringConverter}, ConverterParameter=StartsAt, Source={StaticResource Proxy}}"/>
+                                </StackPanel>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                    <AppBarButton Icon="People" Label="Zmień grupę" Command="{Binding Data.SelectedCommand, Source={StaticResource Proxy}}"/>
+                </CommandBar>
+            </Grid>
+        </controls:BusyIndicator>
+        <controls:NoSettingMessage Visibility="{Binding FormVisibled, Converter={StaticResource BooleanToVisibilityConverter}}" ConfigureCommand="{Binding ConfigureCommand}"/>
+    </Grid>
+</controls:NamedPivotItem>

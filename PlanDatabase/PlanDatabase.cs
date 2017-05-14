@@ -1,74 +1,143 @@
 ﻿namespace PlanDatabase
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
+
     using Entities;
+
     using SQLite.Net;
     using SQLite.Net.Platform.WinRT;
 
-    internal class PlanDatabase
+    internal interface IPlanDatabase
+    {
+        Task<List<DatabaseClasses>> GetAllClasseses();
+
+        Task<DatabaseClasses> GetClasseses(int id);
+
+        Task UpdateClasseses(DatabaseClasses classes);
+
+        Task DeleteClasses(int id);
+
+        Task AddClasses(DatabaseClasses classes);
+
+        Task UpdateStudentSetting(StudentSetting setting);
+
+        Task<StudentSetting> GetStudentSetting();
+    }
+
+    internal class PlanDatabase : IPlanDatabase
     {
         private static PlanDatabase planDatabase;
-        private readonly string databasePath = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "planDb.sqlite");
+
+        private readonly string databasePath = Path.Combine(
+            Windows.Storage.ApplicationData.Current.LocalFolder.Path,
+            "planDb.sqlite");
 
         private PlanDatabase()
         {
+            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
             if (!File.Exists(this.databasePath))
             {
+                this.CreateDatabase();
+            }
+            try
+            {
+                connection.Get<StudentSetting>(0);
+                connection.Table<DatabaseClasses>();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                File.Delete(this.databasePath);
                 this.CreateDatabase();
             }
         }
 
         public static PlanDatabase Instance => planDatabase ?? (planDatabase = new PlanDatabase());
 
-        public List<DatabaseClasses> GetAllClasseses()
+        public Task<List<DatabaseClasses>> GetAllClasseses()
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            return connection.Table<DatabaseClasses>().ToList();
+            return Task.Factory.StartNew(
+                () =>
+                    {
+                        var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                        return connection.Table<DatabaseClasses>().ToList();
+                    });
         }
 
-        public DatabaseClasses GetClasseses(int id)
+        public Task<DatabaseClasses> GetClasseses(int id)
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            return connection.Get<DatabaseClasses>(id);
+            return Task.Factory.StartNew(
+                () =>
+                    {
+                        var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                        return connection.Get<DatabaseClasses>(id);
+                    });
         }
 
-        public void UpdateClasseses(DatabaseClasses classes)
+        public Task UpdateClasseses(DatabaseClasses classes)
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            connection.Update(classes);
+            return Task.Factory.StartNew(
+                () =>
+                    {
+                        var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                        connection.Update(classes);
+                    });
         }
 
-        public void DeleteClasses(DatabaseClasses classes)
+        public Task DeleteClasses(int id)
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            connection.Delete(classes);
+            return Task.Factory.StartNew(
+                () =>
+                    {
+                        var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                        connection.Delete(id);
+                    });
         }
 
-        public void AddClasses(DatabaseClasses classes)
+        public Task AddClasses(DatabaseClasses classes)
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            connection.Insert(classes);
+            return Task.Factory.StartNew(
+                () =>
+                    {
+                        var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                        connection.Insert(classes);
+                    });
         }
 
-        public void UpdateStudentSetting(StudentSetting setting)
+        public Task UpdateStudentSetting(StudentSetting setting)
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            if (connection.Get<StudentSetting>(0) == null)
-            {
-                connection.Insert(setting);
-            }
-            else
-            {
-                connection.Update(setting);
-            }
+            return Task.Factory.StartNew(
+                () =>
+                    {
+                        var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                        if (connection.Get<StudentSetting>(0) == null)
+                        {
+                            connection.Insert(setting);
+                        }
+                        else
+                        {
+                            connection.Update(setting);
+                        }
+                    });
         }
 
-        public StudentSetting GetStudentSetting()
+        public Task<StudentSetting> GetStudentSetting()
         {
-            var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-            return connection.Get<StudentSetting>(0);
+            return Task.Factory.StartNew(
+                () =>
+                {
+                    var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                    try
+                    {
+                        return connection.Get<StudentSetting>(0);
+                    }
+                    catch {}
+                    return null;
+                });           
         }
 
         private void CreateDatabase()

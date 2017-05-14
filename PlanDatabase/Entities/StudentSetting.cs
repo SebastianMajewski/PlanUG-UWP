@@ -1,11 +1,15 @@
 ﻿namespace PlanDatabase.Entities
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using SQLite.Net.Attributes;
 
     public class StudentSetting
     {
+        [Column("Faculties")]
+        private string faculties { get; set; }
+
         [PrimaryKey]
         private int Id { get; } = 0;
 
@@ -19,7 +23,19 @@
 
         public string Speciality { get; set; }
 
-        public virtual List<string> Faculties { get; set; }
+        [Ignore]
+        public List<string> Faculties
+        {
+            get
+            {
+                return this.faculties.Split('#').ToList();
+            }
+
+            set
+            {
+                this.faculties = string.Join("#", value);
+            }
+        }
 
         public string SeminarPrefix { get; set; }
 

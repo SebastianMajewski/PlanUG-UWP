@@ -1,4 +1,4 @@
-﻿<PivotItem
+﻿<controls:NamedPivotItem
     x:Class="PlanVisual.Views.Changes"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,7 +13,7 @@
     <interactivity:Interaction.Behaviors>
         <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
     </interactivity:Interaction.Behaviors>
-    <PivotItem.Resources>
+    <controls:NamedPivotItem.Resources>
         <DataTemplate x:DataType="planServiceReference:Change" x:Key="SelectedChangesTemplate">
             <StackPanel Margin="0,10,0,10">
                 <TextBlock Text="{x:Bind Subject}" FontSize="20" FontWeight="Bold" TextWrapping="WrapWholeWords"/>
@@ -68,7 +68,7 @@
                 </Grid>
             </StackPanel>
         </DataTemplate>
-    </PivotItem.Resources>
+    </controls:NamedPivotItem.Resources>
     <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
         <ScrollViewer>
             <StackPanel>
@@ -96,4 +96,4 @@
             </StackPanel>
         </ScrollViewer>
     </controls:BusyIndicator>
-</PivotItem>
+</controls:NamedPivotItem>

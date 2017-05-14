@@ -101,17 +101,24 @@
     </Compile>
     <Compile Include="Bases\ViewModelBase.cs" />
     <Compile Include="Behaviours\CombinedSelectionChangedBehavior.cs" />
+    <Compile Include="Behaviours\NavigatedPivotBehavior.cs" />
     <Compile Include="Behaviours\PivotItemSelectedBehavior.cs" />
     <Compile Include="Behaviours\PivotSelectBehavior.cs" />
     <Compile Include="Behaviours\TemplateChangeOnSelectedBehavior.cs" />
     <Compile Include="Controls\BusyIndicator.xaml.cs">
       <DependentUpon>BusyIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NamedPivotItem.xaml.cs">
+      <DependentUpon>NamedPivotItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PlanGridHeader.xaml.cs">
       <DependentUpon>PlanGridHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PlanGridTile.xaml.cs">
       <DependentUpon>PlanGridTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NoSettingMessage.xaml.cs">
+      <DependentUpon>NoSettingMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\StudiesOptionsForm.xaml.cs">
       <DependentUpon>StudiesOptionsForm.xaml</DependentUpon>
@@ -123,9 +130,11 @@
     <Compile Include="Helpers\BindingProxy.cs" />
     <Compile Include="Helpers\TypeHelpers.cs" />
     <Compile Include="Tools\Improver.cs" />
+    <Compile Include="Tools\PivotNavigator.cs" />
     <Compile Include="Tools\PlanGrid.cs" />
     <Compile Include="ViewModels\ChangesViewModel.cs" />
     <Compile Include="ViewModels\FacultyViewModel.cs" />
+    <Compile Include="ViewModels\ForStudentViewModel.cs" />
     <Compile Include="ViewModels\StudyViewModel.cs" />
     <Compile Include="Views\Changes.xaml.cs">
       <DependentUpon>Changes.xaml</DependentUpon>
@@ -178,6 +187,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\NamedPivotItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PlanGridHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,6 +198,10 @@
     <Page Include="Controls\PlanGridTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NoSettingMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\StudiesOptionsForm.xaml">
       <SubType>Designer</SubType>
@@ -220,6 +237,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PlanDatabase\PlanDatabase.csproj">
+      <Project>{319876f3-de7e-453c-85e4-75fa28659349}</Project>
+      <Name>PlanDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plan\Plan.csproj">
       <Project>{16675d81-92de-47e2-8bd7-7e3507f5747f}</Project>
       <Name>Plan</Name>

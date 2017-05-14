@@ -7,7 +7,7 @@
     public class DatabaseClasses
     {
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string Subject { get; set; }
 
@@ -28,5 +28,7 @@
         public string DateTo { get; set; }
 
         public string Group { get; set; }
+
+        public bool IsUserDefined { get; set; }
     }
 }

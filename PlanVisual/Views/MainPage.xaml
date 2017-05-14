@@ -11,12 +11,13 @@
     <Pivot>
         <interactivity:Interaction.Behaviors>
             <behaviours:PivotSelectBehavior/>
+            <behaviours:NavigatedPivotBehavior/>
         </interactivity:Interaction.Behaviors>
-        <views:Changes/>
-        <views:ForStudy/>
-        <views:ForStudent/>
-        <views:Seminars/>
-        <views:Faculties/>
-        <views:Settings/>
+        <views:Changes ItemName="Changes"/>
+        <views:ForStudy ItemName="ForStudy"/>
+        <views:ForStudent ItemName="ForStudent"/>
+        <views:Seminars ItemName="Seminars"/>
+        <views:Faculties ItemName="Faculties"/>
+        <views:Settings ItemName="Settings"/>
     </Pivot>
 </Page>
