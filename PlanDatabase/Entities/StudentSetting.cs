@@ -7,11 +7,8 @@
 
     public class StudentSetting
     {
-        [Column("Faculties")]
-        private string faculties { get; set; }
-
-        [PrimaryKey]
-        private int Id { get; } = 0;
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
 
         public string Symbol { get; set; }
 
@@ -28,17 +25,19 @@
         {
             get
             {
-                return this.faculties.Split('#').ToList();
+                return this.FacultiesString?.Split('#').ToList();
             }
 
             set
             {
-                this.faculties = string.Join("#", value);
+                this.FacultiesString = string.Join("#", value);
             }
         }
 
         public string SeminarPrefix { get; set; }
 
         public string FacultyPrefix { get; set; }
+
+        public string FacultiesString { get; set; }
     }
 }

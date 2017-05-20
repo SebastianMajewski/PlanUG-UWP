@@ -47,7 +47,10 @@
 
         public async Task DeleteUserClasses(ExtendedClasses classes)
         {
-            await this.database.DeleteClasses(classes.AssociatedId.Value);
+            if (classes.AssociatedId != null)
+            {
+                await this.database.DeleteClasses(classes.AssociatedId.Value);
+            }
         }
 
         public async Task UpdateUserClasses(ExtendedClasses classes)
@@ -72,6 +75,11 @@
 
         private ExtendedClasses ToExtendedClasses(DatabaseClasses classes)
         {
+            if (classes.Id == null)
+            {
+                classes.Id = default(int);
+            }
+
             return new ExtendedClasses(classes.Id.Value)
             {
                 Subject = classes.Subject,

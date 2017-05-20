@@ -1,26 +1,20 @@
 ﻿namespace PlanVisual.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Linq.Expressions;
-
-    using Windows.UI.Notifications;
-
     using Bases;
     using Helpers;
     using Plan.DataClasses;
     using Plan.PlanServiceReference;
-
-    using PlanVisual.Tools;
-
-    using Prism.Commands;
     using PlanDatabase;
     using PlanDatabase.Entities;
+    using Prism.Commands;
+    using Tools;
 
     public class ForStudentViewModel : ViewModelBase
     {
+        private readonly PlanRepository repository;
         private ObservableCollection<ExtendedClasses> classes;
         private ObservableCollection<PlanSelect> options;
         private IEnumerable<IGrouping<object, ExtendedClasses>> groupedclasses;
@@ -28,7 +22,6 @@
         private DelegateCommand configureCommand;
         private bool formVisibled;
         private string filter;
-        private PlanRepository repository;
         private StudentSetting setting;
 
         public ForStudentViewModel()
@@ -72,8 +65,13 @@
         {
             get
             {
-                this.GetSetting();
-                return this.setting == null;
+                return this.formVisibled;
+            }
+
+            private set
+            {
+                this.formVisibled = value;
+                this.OnPropertyChanged(() => this.FormVisibled);
             }
         }
 
@@ -112,6 +110,19 @@
         private async void Load()
         {
             this.LoadingOn();
+            this.setting = await this.repository.GetStudentSetting();
+            if (this.setting != null)
+            {
+                this.FormVisibled = false;
+                var c = await this.Service.GetPlanForStudent(this.ConvertSetting(this.setting));
+                this.Classes = new ObservableCollection<ExtendedClasses>(c);
+                this.ChangeGroupByProperty(this.Filter);
+            }
+            else
+            {
+                this.FormVisibled = true;
+            }
+
             this.LoadingOff();       
         }
 
@@ -129,15 +140,27 @@
             }
         }
 
+/*
         private void ChangeGroupByProperty<T, TP>(Expression<Func<T, TP>> expression) where T : class
         {
             // this.ChangeGroupByProperty(TypeHelpers.PropertyName(expression));
             this.Filter = TypeHelpers.PropertyName(expression);
         }
+*/
 
-        private async void GetSetting()
+        private PlanForStudentSetting ConvertSetting(StudentSetting set)
         {
-            this.setting = await this.repository.GetStudentSetting();
+            return new PlanForStudentSetting
+            {
+                Faculties = set.Faculties,
+                FacultyPrefix = set.FacultyPrefix,
+                Group = set.Group,
+                Lectorate = set.Lectorate,
+                SeminarPrefix = set.SeminarPrefix,
+                Seminar = set.Seminar,
+                Speciality = set.Speciality,
+                Symbol = set.Symbol
+            };
         }
     }
 }

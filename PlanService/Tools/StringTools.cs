@@ -1,4 +1,4 @@
-﻿namespace Plan.Tools
+﻿namespace PlanService.Tools
 {
     using System.Collections.Generic;
 

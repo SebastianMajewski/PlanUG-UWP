@@ -8,9 +8,10 @@
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string)
+            var s = value as string;
+            if (s != null)
             {
-                return string.IsNullOrEmpty((string)value) ? Visibility.Collapsed : Visibility.Visible;
+                return string.IsNullOrEmpty(s) ? Visibility.Collapsed : Visibility.Visible;
             }
             else
             {
@@ -18,7 +19,6 @@
             }
         }
             
-
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             throw new NotImplementedException();

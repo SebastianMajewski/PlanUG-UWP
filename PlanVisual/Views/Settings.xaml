@@ -5,30 +5,77 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:PlanVisual.Controls"
+    xmlns:planServiceReference="using:Plan.PlanServiceReference"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviours="using:PlanVisual.Behaviours"
     mc:Ignorable="d"
     Header="Ustawienia">
+    <interactivity:Interaction.Behaviors>
+        <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
+    </interactivity:Interaction.Behaviors>
     <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
         <ScrollViewer>
             <StackPanel>
+                <TextBlock Text="Ustawienia studenta:" FontSize="20"></TextBlock>
                 <StackPanel Margin="0,5,0,0">
                     <TextBlock Text="Rok i Kierunek:"/>
-                    <ComboBox ></ComboBox>
+                    <ComboBox ItemsSource="{Binding StudentSettings}" SelectedItem="{Binding SelectedStudentSetting, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="planServiceReference:Setting">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="0,5,0,0">
+                <StackPanel Margin="0,5,0,0" Visibility="{Binding SpecjalizationsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="Specjalizacja:"/>
-                    <ComboBox ></ComboBox>
+                    <ComboBox SelectedItem="{Binding SelectedSpecjalization, Mode=TwoWay}" ItemsSource="{Binding Specializations}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="planServiceReference:Specialization">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="0,5,0,0">
+                <StackPanel Margin="0,5,0,0" Visibility="{Binding GroupsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="Grupa:"/>
-                    <ComboBox ></ComboBox>
+                    <ComboBox ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="planServiceReference:Group">
+                                <TextBlock Text="{x:Bind Number}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
-                <StackPanel Margin="0,5,0,0">
+                <StackPanel Margin="0,5,0,0" Visibility="{Binding LectoratesVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="Grupa Lektoratu:"/>
-                    <ComboBox ></ComboBox>
+                    <ComboBox ItemsSource="{Binding Lectorates}" SelectedItem="{Binding SelectedLectorate, Mode=TwoWay}"></ComboBox>
                 </StackPanel>
-                <StackPanel Margin="0,5,0,0">
+                <StackPanel Margin="0,5,0,0" Visibility="{Binding SeminarsVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="Seminarium:"/>
-                    <ComboBox ></ComboBox>
+                    <ComboBox ItemsSource="{Binding Seminars}" SelectedItem="{Binding SelectedSeminar, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="planServiceReference:PlanSelect">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="0,5,0,0" Visibility="{Binding FacultiesVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="Fakultety:"/>
+                    <ListView ItemsSource="{Binding Faculties}" SelectionMode="Multiple" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviours:SelectedItemsBehavior SelectedItems="{Binding SelectedFaculties, Mode=TwoWay}"/>
+                        </interactivity:Interaction.Behaviors>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="planServiceReference:PlanSelect">
+                                <TextBlock Text="{x:Bind Name}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding SaveStudentSettingsCommand}">Zapisz</Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

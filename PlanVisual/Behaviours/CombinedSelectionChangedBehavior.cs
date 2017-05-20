@@ -1,9 +1,5 @@
-﻿
-
-namespace PlanVisual.Behaviours
+﻿namespace PlanVisual.Behaviours
 {
-    using System;
-
     using Microsoft.Xaml.Interactivity;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;

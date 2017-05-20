@@ -27,6 +27,14 @@
                     <TextBlock Text="Prowadzący:"/>
                     <TextBlock Grid.Column="1" Text="{x:Bind Lecturer}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
                 </Grid>
+                <Grid Visibility="{x:Bind Type, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Rodzaj:"/>
+                    <TextBlock Grid.Column="1" Text="{x:Bind Type.Name}" Margin="5,0,0,0" TextWrapping="WrapWholeWords"/>
+                </Grid>
                 <Grid Visibility="{x:Bind Group, Converter={StaticResource IsNullOrEmptyToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -122,7 +130,7 @@
                         </ListView>
                     </SemanticZoom.ZoomedOutView>
                     <SemanticZoom.ZoomedInView>
-                        <ListView ItemsSource="{x:Bind GroupedClassesCvs.View, Mode=OneWay}" Background="Transparent">
+                        <ListView SelectionMode="Extended" ItemsSource="{x:Bind GroupedClassesCvs.View, Mode=OneWay}" Background="Transparent">
                             <interactivity:Interaction.Behaviors>
                                 <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
                             </interactivity:Interaction.Behaviors>

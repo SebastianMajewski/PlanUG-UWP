@@ -1,17 +1,13 @@
 ﻿namespace PlanVisual.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Linq.Expressions;
     using Bases;
     using Helpers;
     using Plan.DataClasses;
-
-    using PlanVisual.Tools;
-
     using Prism.Commands;
+    using Tools;
 
     public class FacultyViewModel : ViewModelBase
     {
@@ -19,10 +15,6 @@
         private IEnumerable<IGrouping<object, ExtendedClasses>> groupedFaculty;
         private DelegateCommand selectedCommand;
         private string filter;
-
-        public FacultyViewModel()
-        {
-        }
 
         public DelegateCommand SelectedCommand => this.selectedCommand ?? (this.selectedCommand = new DelegateCommand(this.Load));
 
@@ -93,9 +85,11 @@
             }
         }
 
+/*
         private void ChangeGroupByProperty<T, TP>(Expression<Func<T, TP>> expression) where T : class
         {
             this.ChangeGroupByProperty(TypeHelpers.PropertyName(expression));
         }
+*/
     }
 }

@@ -141,7 +141,7 @@
                 {
                     Symbol = setting.name,
                     Name = setting.longname,
-                    Params = (GetMethodParams)setting.Clone(),
+                    Params = setting.Clone(),
                     Lectorates = new List<string>(),
                     Specjalizations = new List<Specialization>(),
                     Faculties = new List<PlanSelect>(),
@@ -228,6 +228,8 @@
             {
                 setting.Faculties = await this.DownloadFacultySettings(setting);
                 setting.Seminars = await this.DownloadSeminarSettings(setting);
+                setting.FacultyPrefix = this.GetFacultyPrefix(setting);
+                setting.SeminarPrefix = this.GetSeminarPrefix(setting);
             }
 
             return settingsList;
@@ -396,7 +398,7 @@
 
                 options = setting.Symbol[1] == 'I' ? options.Where(x => x.GetAttributeValue("class", string.Empty) == "inf") : options.Where(x => x.GetAttributeValue("class", string.Empty) == "mat");
 
-                return options.Select(option => new PlanSelect { LinkSuffix = option.GetAttributeValue("value", string.Empty), Name = option.InnerText }).ToList();
+                return options.Select(option => new PlanSelect { LinkSuffix = option.GetAttributeValue("value", string.Empty), Name = option.NextSibling.InnerText }).ToList();
             }
             catch (Exception e)
             {
@@ -436,12 +438,52 @@
 
                 var options = divHtml.Descendants("option").Skip(1);
                 options = setting.Symbol[1] == 'I' ? options.Where(x => x.GetAttributeValue("class", string.Empty) == "inf") : options.Where(x => x.GetAttributeValue("class", string.Empty) == "mat");
-                return options.Select(option => new PlanSelect { LinkSuffix = option.GetAttributeValue("value", string.Empty), Name = option.InnerText }).ToList();
+                return options.Select(option => new PlanSelect { LinkSuffix = option.GetAttributeValue("value", string.Empty), Name = option.NextSibling.InnerText }).ToList();
             }
             catch (Exception e)
             {
                 throw new FaultException<ServiceFault>(new ServiceFault(ErrorType.FacultyHtmlParsingError, e));
             }
+        }
+
+        private string GetSeminarPrefix(Setting setting)
+        {
+            if (setting?.Params == null)
+            {
+                return null;
+            }
+
+            if (setting.Params.se1)
+            {
+                return "se1";
+            }
+
+            if (setting.Params.se2)
+            {
+                return "se2";
+            }
+
+            return setting.Params.sel ? "sel" : null;
+        }
+
+        private string GetFacultyPrefix(Setting setting)
+        {
+            if (setting?.Params == null)
+            {
+                return null;
+            }
+
+            if (setting.Params.fak)
+            {
+                return "fak";
+            }
+
+            if (setting.Params.fal)
+            {
+                return "fal";
+            }
+
+            return setting.Params.fam ? "fam" : null;
         }
     }
 }

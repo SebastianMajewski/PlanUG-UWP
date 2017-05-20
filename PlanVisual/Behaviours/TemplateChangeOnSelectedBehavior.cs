@@ -60,23 +60,29 @@
 
         private void AssociatedObjectOnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            foreach (var listItem in e.AddedItems)
+            var listView = sender as ListView;
+            if (listView?.Items == null)
             {
-                var listView = sender as ListView;
-                var item = listView?.ContainerFromItem(listItem) as ListViewItem;
-                if (item != null)
-                {
-                    item.ContentTemplate = this.SelectedTemplate;
-                }
+                return;
             }
 
-            foreach (var listItem in e.RemovedItems)
+            foreach (var listItem in listView.Items)
             {
-                var listView = sender as ListView;
-                var item = listView?.ContainerFromItem(listItem) as ListViewItem;
-                if (item != null)
+                if (listView.SelectedItems.Contains(listItem))
                 {
-                    item.ContentTemplate = this.DefaulTemplate;
+                    var item = listView.ContainerFromItem(listItem) as ListViewItem;
+                    if (item != null)
+                    {
+                        item.ContentTemplate = this.SelectedTemplate;
+                    }
+                }
+                else
+                {
+                    var item = listView.ContainerFromItem(listItem) as ListViewItem;
+                    if (item != null)
+                    {
+                        item.ContentTemplate = this.DefaulTemplate;
+                    }
                 }
             }
         }

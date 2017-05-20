@@ -1,38 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PlanVisual.Converters
+﻿namespace PlanVisual.Converters
 {
+    using System;
     using Windows.UI.Xaml.Data;
 
     public class IsSelectedToPropertyStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string && (string)value == (string)parameter)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            var s = value as string;
+            return s != null && s == (string)parameter;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            
-            if (value is bool && (bool)value == true)
+        { 
+            if (value is bool && (bool)value)
             {
                 return parameter;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
     }
 }

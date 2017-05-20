@@ -3,12 +3,12 @@
     using System;
     using System.Collections.ObjectModel;
     using System.ServiceModel;
-    using Windows.UI.Popups;
     using Bases;
     using Plan.DataClasses;
     using Plan.PlanServiceReference;
     using Prism.Commands;
     using Tools;
+    using Windows.UI.Popups;
 
     public class ChangesViewModel : ViewModelBase
     {
@@ -86,9 +86,6 @@
                 Improver.ChangesSplit(c);
                 Improver.LecturerSplit(c);
             }
-
-            //this.UserPlanChanges = new ObservableCollection<ExtendedChange> { this.Changes.Last() };
-            //this.UserHasPlanChanges = true;
 
             this.LoadingOff();
         }

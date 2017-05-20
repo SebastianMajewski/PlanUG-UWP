@@ -76,7 +76,7 @@
                     <Border BorderThickness="0,0,0,2" BorderBrush="#FF2F6DD8">
                         <TextBlock Text="Zmiany twojego planu" FontSize="24"/>
                     </Border>
-                    <ListView ItemsSource="{Binding UserPlanChanges}" Background="Transparent">
+                    <ListView SelectionMode="Extended" ItemsSource="{Binding UserPlanChanges}" Background="Transparent">
                         <interactivity:Interaction.Behaviors>
                             <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ChangesTemplate}" SelectedTemplate="{StaticResource SelectedChangesTemplate}"/>
                             <behaviours:CombinedSelectionChangedBehavior LinkedListView="{Binding ElementName=AllChangesList}"/>
@@ -87,7 +87,7 @@
                     <Border BorderThickness="0,0,0,2" BorderBrush="#FF2F6DD8">
                         <TextBlock Text="Wszystkie zmiany" FontSize="24"/>
                     </Border>
-                    <ListView Name="AllChangesList" ItemsSource="{Binding Changes}" Background="Transparent" ItemTemplate="{StaticResource ChangesTemplate}">
+                    <ListView SelectionMode="Extended" Name="AllChangesList" ItemsSource="{Binding Changes}" Background="Transparent" ItemTemplate="{StaticResource ChangesTemplate}">
                         <interactivity:Interaction.Behaviors>
                             <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ChangesTemplate}" SelectedTemplate="{StaticResource SelectedChangesTemplate}"/>
                         </interactivity:Interaction.Behaviors>

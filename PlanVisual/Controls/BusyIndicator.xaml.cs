@@ -1,11 +1,10 @@
 ﻿namespace PlanVisual.Controls
 {
     using Windows.UI.Xaml;
-    using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Markup;
 
     [ContentProperty(Name = "UnderContent")]
-    public sealed partial class BusyIndicator : UserControl
+    public sealed partial class BusyIndicator
     {
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(BusyIndicator), null);
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive", typeof(bool), typeof(BusyIndicator), null);

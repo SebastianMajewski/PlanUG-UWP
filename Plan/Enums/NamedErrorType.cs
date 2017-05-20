@@ -1,4 +1,4 @@
-﻿namespace PlanService.Enums
+﻿namespace Plan.Enums
 {
     public enum ErrorType
     {

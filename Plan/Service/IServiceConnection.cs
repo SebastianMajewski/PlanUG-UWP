@@ -1,15 +1,11 @@
 ﻿namespace Plan.Service
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Threading.Tasks;
+    using PlanServiceReference;
 
-    using DataClasses;
-
-    using Plan.PlanServiceReference;
-
-    using ExtendedChange = Plan.DataClasses.ExtendedChange;
-    using ExtendedClasses = Plan.DataClasses.ExtendedClasses;
+    using ExtendedChange = DataClasses.ExtendedChange;
+    using ExtendedClasses = DataClasses.ExtendedClasses;
 
     public interface IServiceConnection
     {

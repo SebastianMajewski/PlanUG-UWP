@@ -61,9 +61,11 @@
   <xs:complexType name="Setting">
     <xs:sequence>
       <xs:element minOccurs="0" name="Faculties" nillable="true" type="tns:ArrayOfPlanSelect" />
+      <xs:element minOccurs="0" name="FacultyPrefix" nillable="true" type="xs:string" />
       <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Lectorates" nillable="true" type="q4:ArrayOfstring" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Params" nillable="true" type="tns:GetMethodParams" />
+      <xs:element minOccurs="0" name="SeminarPrefix" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Seminars" nillable="true" type="tns:ArrayOfPlanSelect" />
       <xs:element minOccurs="0" name="Specjalizations" nillable="true" type="tns:ArrayOfSpecialization" />
       <xs:element minOccurs="0" name="Symbol" nillable="true" type="xs:string" />

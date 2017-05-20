@@ -16,6 +16,12 @@
         public GetMethodParams Params { get; set; }
 
         [DataMember]
+        public string SeminarPrefix { get; set; }
+
+        [DataMember]
+        public string FacultyPrefix { get; set; }
+
+        [DataMember]
         public List<Specialization> Specjalizations { get; set; }
 
         [DataMember]

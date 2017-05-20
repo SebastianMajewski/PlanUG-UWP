@@ -242,6 +242,7 @@
                     grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 }
             }
+
             return grid;
         }
 
@@ -306,7 +307,10 @@
                 }
             }
 
-            result[1] = this.exactHourRow[classes.StartsAt.Value];
+            if (classes.StartsAt != null)
+            {
+                result[1] = this.exactHourRow[classes.StartsAt.Value];
+            }
 
             while (!this.IsEmpty(result[0], result[1]))
             {

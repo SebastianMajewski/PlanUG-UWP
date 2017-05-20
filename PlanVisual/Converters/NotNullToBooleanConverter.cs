@@ -1,7 +1,6 @@
 ﻿namespace PlanVisual.Converters
 {
     using System;
-    using Windows.UI.Xaml;
     using Windows.UI.Xaml.Data;
 
     public class NotNullToBooleanConverter : IValueConverter
@@ -11,7 +10,6 @@
             return value != null;
         }
             
-
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             throw new NotImplementedException();

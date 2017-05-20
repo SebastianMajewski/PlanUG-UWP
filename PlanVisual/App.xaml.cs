@@ -1,14 +1,14 @@
 ﻿namespace PlanVisual
 {
     using System;
+    using System.Net.NetworkInformation;
     using Views;
     using Windows.ApplicationModel;
     using Windows.ApplicationModel.Activation;
+    using Windows.UI.Popups;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Navigation;
-
-    using Plan;
 
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -21,7 +21,6 @@
             this.Suspending += this.OnSuspending;
         }
 
-
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
@@ -30,6 +29,22 @@
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+            this.UnhandledException += (sender, args) =>
+                {
+                    // if (global::System.Diagnostics.Debugger.IsAttached) global::System.Diagnostics.Debugger.Break();
+                    if (!NetworkInterface.GetIsNetworkAvailable())
+                    {
+                        this.Network();
+                        args.Handled = true;
+                    }
+                    else
+                    {
+                        this.Error(args.Exception);
+                        args.Handled = true;
+                    }
+                };
+
             var rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -63,6 +78,17 @@
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private async void Network()
+        {
+            await new MessageDialog("Nie masz połączenia z internetem.").ShowAsync();
+            Current.Exit();
+        }
+
+        private async void Error(Exception e)
+        {
+            await new MessageDialog(e.Message).ShowAsync();
         }
 
         /// <summary>

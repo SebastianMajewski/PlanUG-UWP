@@ -478,11 +478,15 @@ namespace Plan.PlanServiceReference {
         
         private System.Collections.Generic.List<Plan.PlanServiceReference.PlanSelect> FacultiesField;
         
+        private string FacultyPrefixField;
+        
         private System.Collections.Generic.List<string> LectoratesField;
         
         private string NameField;
         
         private Plan.PlanServiceReference.GetMethodParams ParamsField;
+        
+        private string SeminarPrefixField;
         
         private System.Collections.Generic.List<Plan.PlanServiceReference.PlanSelect> SeminarsField;
         
@@ -499,6 +503,19 @@ namespace Plan.PlanServiceReference {
                 if ((object.ReferenceEquals(this.FacultiesField, value) != true)) {
                     this.FacultiesField = value;
                     this.RaisePropertyChanged("Faculties");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FacultyPrefix {
+            get {
+                return this.FacultyPrefixField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FacultyPrefixField, value) != true)) {
+                    this.FacultyPrefixField = value;
+                    this.RaisePropertyChanged("FacultyPrefix");
                 }
             }
         }
@@ -538,6 +555,19 @@ namespace Plan.PlanServiceReference {
                 if ((object.ReferenceEquals(this.ParamsField, value) != true)) {
                     this.ParamsField = value;
                     this.RaisePropertyChanged("Params");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SeminarPrefix {
+            get {
+                return this.SeminarPrefixField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SeminarPrefixField, value) != true)) {
+                    this.SeminarPrefixField = value;
+                    this.RaisePropertyChanged("SeminarPrefix");
                 }
             }
         }

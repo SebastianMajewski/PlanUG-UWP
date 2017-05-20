@@ -1,6 +1,5 @@
 ﻿namespace Plan.Tools
 {
-
     using DataClasses;
     using Enums;
     using PlanServiceReference;

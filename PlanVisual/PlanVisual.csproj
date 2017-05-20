@@ -21,6 +21,7 @@
     <AppxPackageDir>C:\Users\Apocaliptic95\Desktop\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -104,6 +105,7 @@
     <Compile Include="Behaviours\NavigatedPivotBehavior.cs" />
     <Compile Include="Behaviours\PivotItemSelectedBehavior.cs" />
     <Compile Include="Behaviours\PivotSelectBehavior.cs" />
+    <Compile Include="Behaviours\SelectedItemsBehavior.cs" />
     <Compile Include="Behaviours\TemplateChangeOnSelectedBehavior.cs" />
     <Compile Include="Controls\BusyIndicator.xaml.cs">
       <DependentUpon>BusyIndicator.xaml</DependentUpon>

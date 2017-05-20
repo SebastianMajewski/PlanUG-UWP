@@ -121,7 +121,7 @@
                     </ListView>
                 </SemanticZoom.ZoomedOutView>
                 <SemanticZoom.ZoomedInView>
-                    <ListView ItemsSource="{x:Bind GroupedFacultyCvs.View, Mode=OneWay}" Background="Transparent">
+                    <ListView SelectionMode="Extended" ItemsSource="{x:Bind GroupedFacultyCvs.View, Mode=OneWay}" Background="Transparent">
                         <interactivity:Interaction.Behaviors>
                             <behaviours:TemplateChangeOnSelectedBehavior DefaulTemplate="{StaticResource ClassesTemplate}" SelectedTemplate="{StaticResource SelectedClassesTemplate}"/>
                         </interactivity:Interaction.Behaviors>

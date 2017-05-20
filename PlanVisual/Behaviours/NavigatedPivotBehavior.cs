@@ -31,10 +31,5 @@
                 }
             };
         }
-
-        protected override void OnDetaching()
-        {
-            base.OnDetaching();
-        }
     }
 }

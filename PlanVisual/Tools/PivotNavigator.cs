@@ -1,10 +1,8 @@
 ﻿namespace PlanVisual.Tools
 {
     using System.Collections.Generic;
-
+    using Controls;
     using Windows.UI.Xaml.Controls;
-
-    using PlanVisual.Controls;
 
     public class PivotNavigator
     {

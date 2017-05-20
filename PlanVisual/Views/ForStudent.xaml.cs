@@ -1,6 +1,6 @@
 ﻿namespace PlanVisual.Views
 {
-    using PlanVisual.ViewModels;
+    using ViewModels;
 
     public sealed partial class ForStudent
     {

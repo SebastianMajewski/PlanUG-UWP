@@ -43,10 +43,11 @@
             {
                 this.CreateDatabase();
             }
+
             try
             {
-                connection.Get<StudentSetting>(0);
-                connection.Table<DatabaseClasses>();
+                connection.Table<StudentSetting>().Any();
+                connection.Table<DatabaseClasses>().Any();
             }
             catch (Exception)
             {
@@ -64,7 +65,9 @@
                 () =>
                     {
                         var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-                        return connection.Table<DatabaseClasses>().ToList();
+                        var value = connection.Table<DatabaseClasses>().ToList();
+                        connection.Close();
+                        return value;
                     });
         }
 
@@ -74,7 +77,9 @@
                 () =>
                     {
                         var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-                        return connection.Get<DatabaseClasses>(id);
+                        var value = connection.Get<DatabaseClasses>(id);
+                        connection.Close();
+                        return value;
                     });
         }
 
@@ -85,6 +90,7 @@
                     {
                         var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
                         connection.Update(classes);
+                        connection.Close();
                     });
         }
 
@@ -95,6 +101,7 @@
                     {
                         var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
                         connection.Delete(id);
+                        connection.Close();
                     });
         }
 
@@ -105,6 +112,7 @@
                     {
                         var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
                         connection.Insert(classes);
+                        connection.Close();
                     });
         }
 
@@ -114,7 +122,7 @@
                 () =>
                     {
                         var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
-                        if (connection.Get<StudentSetting>(0) == null)
+                        if (!connection.Table<StudentSetting>().Any())
                         {
                             connection.Insert(setting);
                         }
@@ -122,6 +130,8 @@
                         {
                             connection.Update(setting);
                         }
+
+                        connection.Close();
                     });
         }
 
@@ -133,9 +143,16 @@
                     var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
                     try
                     {
-                        return connection.Get<StudentSetting>(0);
+                        var value = connection.Table<StudentSetting>().FirstOrDefault();
+                        connection.Close();
+                        return value;
                     }
-                    catch {}
+                    catch
+                    {
+                        // ignored
+                    }
+
+                    connection.Close();
                     return null;
                 });           
         }
@@ -145,6 +162,7 @@
             var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
             connection.CreateTable<DatabaseClasses>();
             connection.CreateTable<StudentSetting>();
+            connection.Close();
         }
     }
 }
