@@ -19,6 +19,8 @@
 
         Task UpdateClasseses(DatabaseClasses classes);
 
+        Task ClearClasses();
+
         Task DeleteClasses(int id);
 
         Task AddClasses(DatabaseClasses classes);
@@ -92,6 +94,17 @@
                         connection.Update(classes);
                         connection.Close();
                     });
+        }
+
+        public Task ClearClasses()
+        {
+            return Task.Factory.StartNew(
+                () =>
+                {
+                    var connection = new SQLiteConnection(new SQLitePlatformWinRT(), this.databasePath);
+                    connection.DeleteAll<DatabaseClasses>();
+                    connection.Close();
+                });
         }
 
         public Task DeleteClasses(int id)

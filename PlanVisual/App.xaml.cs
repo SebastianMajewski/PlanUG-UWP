@@ -9,6 +9,7 @@
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Navigation;
+    using PlanBackground;
 
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -29,6 +30,8 @@
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+            BackgroundTask.UnregisterAll();
+            BackgroundTask.RunTask();
 
             this.UnhandledException += (sender, args) =>
                 {

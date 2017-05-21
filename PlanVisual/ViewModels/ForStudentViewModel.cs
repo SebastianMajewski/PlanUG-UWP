@@ -117,6 +117,13 @@
                 var c = await this.Service.GetPlanForStudent(this.ConvertSetting(this.setting));
                 this.Classes = new ObservableCollection<ExtendedClasses>(c);
                 this.ChangeGroupByProperty(this.Filter);
+                await this.repository.ClearClasses();
+                foreach (var extendedClasses in this.Classes)
+                {
+                    await this.repository.AddUserClasses(extendedClasses);
+                }
+
+                PlanBackground.BackgroundTask.IsRegistered();
             }
             else
             {

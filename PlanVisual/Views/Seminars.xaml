@@ -129,7 +129,7 @@
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Key}" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                                        <TextBlock Text="{Binding Key}" Style="{ThemeResource TitleTextBlockStyle}"/>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>

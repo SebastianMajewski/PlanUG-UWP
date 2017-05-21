@@ -239,6 +239,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PlanBackground\PlanBackground.csproj">
+      <Project>{0ab569e4-167c-4276-a602-ed691fe49b28}</Project>
+      <Name>PlanBackground</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PlanDatabase\PlanDatabase.csproj">
       <Project>{319876f3-de7e-453c-85e4-75fa28659349}</Project>
       <Name>PlanDatabase</Name>
@@ -247,6 +251,9 @@
       <Project>{16675d81-92de-47e2-8bd7-7e3507f5747f}</Project>
       <Name>Plan</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notifications\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

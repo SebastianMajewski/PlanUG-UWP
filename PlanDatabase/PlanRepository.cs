@@ -45,6 +45,11 @@
             return this.ToExtendedClasses(await this.database.GetClasseses(id));
         }
 
+        public async Task ClearClasses()
+        {
+            await this.database.ClearClasses();
+        }
+
         public async Task DeleteUserClasses(ExtendedClasses classes)
         {
             if (classes.AssociatedId != null)
