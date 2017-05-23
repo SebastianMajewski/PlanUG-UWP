@@ -10,6 +10,7 @@
     xmlns:helpers="using:PlanVisual.Helpers"
     xmlns:controls="using:PlanVisual.Controls"
     mc:Ignorable="d"
+    x:Name="ForStudentPivot"
     Header="Dla Studenta">
     <interactivity:Interaction.Behaviors>
         <behaviours:PivotItemSelectedBehavior Command="{Binding SelectedCommand}"/>
@@ -98,7 +99,7 @@
             </StackPanel>
         </DataTemplate>
         <CollectionViewSource x:Key="GroupedClassesCvs" x:Name="GroupedClassesCvs" IsSourceGrouped="True" Source="{Binding GroupedClasses, Mode=OneWay}"/>
-        <helpers:BindingProxy x:Key="Proxy"  Data="{Binding ElementName=ForStudyPivot, Path=DataContext}"/>
+        <helpers:BindingProxy x:Key="Proxy"  Data="{Binding ElementName=ForStudentPivot, Path=DataContext}"/>
     </controls:NamedPivotItem.Resources>
     <Grid>
         <controls:BusyIndicator Text="Ładowanie..." IsActive="{Binding IsBusy}">
@@ -161,7 +162,6 @@
                             </Flyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
-                    <AppBarButton Icon="People" Label="Zmień grupę" Command="{Binding Data.SelectedCommand, Source={StaticResource Proxy}}"/>
                 </CommandBar>
             </Grid>
         </controls:BusyIndicator>
