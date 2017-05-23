@@ -11,29 +11,41 @@
 
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            this.deferral = taskInstance.GetDeferral();
-            var repository = new PlanRepository();
-            var tc = new TileController();
-            var classes = await repository.GetAllUserClasses();
-            var today = (from extendedClasses in classes let actualTime = DateTime.UtcNow let dayOfWeek = ((int)actualTime.DayOfWeek + 5) % 6 where (int)extendedClasses.Day.Day == dayOfWeek select extendedClasses).ToList();
-            if (today != null && today.Count() != 0)
+            try
             {
-                var min = today.First();
-                foreach (var c in today)
+                this.deferral = taskInstance.GetDeferral();
+                var repository = new PlanRepository();
+                var tc = new TileController();
+                var classes = await repository.GetAllUserClasses();
+                var today = (from extendedClasses in classes
+                             let actualTime = DateTime.UtcNow
+                             let dayOfWeek = ((int)actualTime.DayOfWeek + 5) % 6
+                             where (int)extendedClasses.Day.Day == dayOfWeek
+                             select extendedClasses).ToList();
+                if (today != null && today.Count() != 0)
                 {
-                    if (c.StartsAt - DateTime.UtcNow.TimeOfDay < min.StartsAt - DateTime.UtcNow.TimeOfDay)
+                    var min = today.First();
+                    foreach (var c in today)
                     {
-                        min = c;
+                        if (c.StartsAt - DateTime.UtcNow.TimeOfDay < min.StartsAt - DateTime.UtcNow.TimeOfDay)
+                        {
+                            min = c;
+                        }
                     }
-                }
 
-                tc.UpdateClasses(new SimpleClasses { Subject = min.Subject, Room = min.Room, Start = min.StartsAt.Value });
+                    tc.UpdateClasses(
+                        new SimpleClasses { Subject = min.Subject, Room = min.Room, Start = min.StartsAt.Value });
+                }
+                else
+                {
+                    tc.UpdateNormal();
+                }
+                this.deferral.Complete();
             }
-            else
+            catch
             {
-                tc.UpdateNormal();
+                // ignored
             }
-            this.deferral.Complete();
         }
     }
 }
