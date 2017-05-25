@@ -33,6 +33,8 @@
             BackgroundTask.UnregisterAll();
             BackgroundTask.RunTask();
 
+            new PlanUGTask().Run(null);
+
             this.UnhandledException += (sender, args) =>
                 {
                     // if (global::System.Diagnostics.Debugger.IsAttached) global::System.Diagnostics.Debugger.Break();
